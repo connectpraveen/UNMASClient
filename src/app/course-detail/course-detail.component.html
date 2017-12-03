@@ -1,0 +1,147 @@
+<html>
+<head>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head> 
+<body>
+  <!-- Navigation -->
+  <navbar></navbar>
+  <!-- Page Content -->
+  <!-- Heading Row -->
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="row display-flex">
+          <div class="col-md-2 right-margin">
+            <!--Left Navigation-->
+            <left-nav></left-nav>
+          </div>
+          <!--col-sm-2-->
+          <div class="col-sm-9 col-md-10" style="min-height:525px">
+          <div  *ngIf="show=='all-courses' then template1;">
+          </div>
+           <div  *ngIf="show=='course' then template2;">
+          </div>
+          <!-- Template to show All courses -->
+           <ng-template #template1>
+          <div class="row panel-margin" style="padding-top:10px">
+              <h6 class="heading-text"> All Courses</h6>
+            </div>
+            <!--/.com-sm-10-->
+            <div *ngFor="let course of Courses">
+            <div class="row panel-margin" style="padding-top:10px;padding-bottom:10px">
+              <div class="col-sm-12 col-md-12 panelbg zero-padding">
+              <div class="row">
+                <div class="col-lg-1 col-sm-2 col-md-1">
+                  <img src="{{course.thumbnailsrc}}" alt="" class="thumbnail-align"> </div>
+                <div class="col-sm-8 col-md-6 col-lg-7 panel-margin">
+                  <h6 class="heading-text image-align zero-padding">{{course.courseName}}</h6>
+                  <div class="body-text"> Created By:{{course.createdBy}}
+                    <br> Scheduled Date: {{course.scheduledDate}}</div>
+                </div>
+                <div class="col-sm-5 col-md-4 col-lg-3 panel-margin image-align" style="padding-top:10px;padding-right:30px;padding-bottom:20px">
+                  <div>
+                  <a (click)="onShowDetails(course.courseName,course.id)">
+                    <button type="button" class="btn btn-sm button-view-style show-detail-size">
+                      <h4 class="body-text" style="color:white"> Show more
+                        <br> Details </h4>
+                    </button>
+                    </a>
+                  </div>
+                </div>
+              </div>
+              </div>
+            </div>
+            </div>
+          </ng-template>
+         <!-- Template to list out courses for a particular training -->
+          <ng-template #template2>
+			<div class="row  panel-margin" style="padding-top:10px;">
+              <h6 class="heading-text">Landmines and Explosive Remnants of War
+                <br><span style="padding-left:40px;">- &gt; </span>Landmines and Explosive Remnants of War 1
+                <br><span style="padding-left:80px">- &gt; {{coursename}}</span></h6>
+            </div>
+            <div class="row panel-margin"  style="padding-top:10px;padding-bottom:10px">
+              <div class="col-sm-12 col-md-12 panelbg zero-padding">
+              <div class="row">
+                <div class="col-lg-1 col-sm-2 col-md-1">
+                  <img src="../assets/images/thumbnail.jpg" alt="" class="thumbnail-align"> </div>
+                <div class="col-sm-8 col-md-6 col-lg-7">
+                  <h6 class="heading-text image-align zero-padding">Modules (Total: {{modulecount}})</h6>
+                  <div class="body-text"> Created By: UNMAS, Libya
+                    <br> Scheduled Date: Nov-23-2016 </div>
+                </div>
+                <div class="col-sm-5 col-md-4 col-lg-3 panel-margin image-align" style="padding-top:10px;padding-right:30px;padding-bottom:20px">
+                  <div>
+                  <a [routerLink]="['module']">
+                    <button type="button" class="btn btn-sm button-view-style show-detail-size">
+                      <h4 class="body-text" style="color:white"> Show all
+                        <br> Modules </h4>
+                    </button>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            </div>
+            <div class="row panel-margin" style="padding-top:20px">
+              <div class="col-sm-12 col-md-12 panelbg zero-padding">
+              <div class="row">
+                <div class="col-lg-1 col-sm-2 col-md-2">
+                  <img src="../assets/images/thumbnail.jpg" alt="" class="thumbnail-align"> </div>
+                <div class="col-sm-8 col-md-5 col-lg-7">
+                  <h6 class="heading-text image-align zero-padding">Exercises</h6>
+                  <div class="body-text"> Created By: UNMAS, Libya
+                    <br> Scheduled Date: Nov-23-2016 </div>
+                </div>
+                <div class="col-sm-5 col-md-4 col-lg-3 panel-margin image-align" style="padding-top:10px;padding-right:30px;padding-bottom:20px">
+                  <div>
+                    <button type="button" class="btn btn-sm button-view-style show-detail-size">
+                      <h4 class="body-text" style="color:white"> Show all
+                        <br> Exercises </h4>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            </div>
+            <div class="row panel-margin" style="padding-top:20px; padding-bottom:30px">
+              <div class="col-sm-12 col-md-12 panelbg zero-padding">
+              <div class="row">
+                <div class="col-lg-1 col-sm-2 col-md-2">
+                  <img src="../assets/images/thumbnail.jpg" alt="" class="thumbnail-align"> </div>
+                <div class="col-sm-8 col-md-5 col-lg-7">
+                  <h6 class="heading-text image-align zero-padding">Random Quiz</h6>
+                  <div class="body-text"> Created By: UNMAS, Libya
+                    <br> Scheduled Date: Nov-23-2016 </div>
+                </div>
+                <div class="col-sm-5 col-md-4 col-lg-3 panel-margin image-align" style="padding-top:10px;padding-right:30px;padding-bottom:20px">
+                  <div>
+                    <button type="button" class="btn btn-sm button-view-style show-detail-size">
+                      <h4 class="body-text" style="color:white"> Show more
+                        <br> Details </h4>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+           </div>
+          </ng-template>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /.row -->
+    <!--/.container-->
+    <!--footer-->
+    <footer>
+     <myfooter></myfooter>
+    </footer>
+    <!-- /.container -->
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+  </div>
+</body>

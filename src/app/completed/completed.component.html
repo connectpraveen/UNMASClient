@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+  <!-- Navigation -->
+   <navbar></navbar>
+  <!-- Page Content -->
+  <!-- Heading Row -->
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 col-sm-12">
+        <div class="row display-flex">
+          <div class="col-md-2  right-margin">
+            <!--Left Navigation-->
+            <left-nav></left-nav>
+             
+            </div>
+          <!--col-sm-2-->
+          <div class="col-sm-12 col-md-10  screen" style="min-height:525px">
+           <div class="row" style="padding-left:15px;padding-top:10px">
+              <h6 class="heading-text"> Completed Training Programmes </h6>
+            </div>
+              <!--/.com-sm-10-->
+              <div class="container" *ngFor="let program of CompletedPrograms">
+            <div class="row" style="padding-bottom:50px">
+              <div class="col-sm-12 col-md-12 col-lg-12 panelbg zero-padding">
+              <div class="row">
+                <div class=" col-sm-2 col-md-1 col-lg-1">
+                  <img src="{{program.thumbnailsrc}}" alt="" class="thumbnail-align"> </div>
+                <div class="col-sm-6 col-md-5 col-lg-6 panel-margin">
+                  <h6 class="heading-text image-align zero-padding"> {{program.title}}</h6>
+                  <div class="body-text"> Training: {{program.trainingName}}
+                    <br> Scheduled Date: {{program.trainingFromDate}} - {{program.trainingToDate}} </div>
+                </div>
+                <div class="col-sm-8 col-md-5 col-lg-4 panel-margin image-align" style="padding-top:10px;padding-right:30px">
+                  <div>
+                    <button type="button" class="btn btn-sm button-show-style" style="float:left" (click)="onShowDetails(program.trainingName,program.id)">
+                      <h4 class="body-text" style="color:white"> Show
+                        <br> Details </h4>
+                    </button>
+                    <button type="button" class="btn btn-sm button-view-style" style="float:right;">
+                      <h4 class="body-text" style="color:white"> View
+                        <br> Students </h4>
+                    </button>
+                   </div>
+                </div>
+              </div>
+              </div>
+            </div>
+         	</div>   
+          </div>
+         </div>
+      </div>
+     </div>
+      <!-- /.row -->
+      <!--/.container-->
+      <!--footer-->
+      <footer>
+      <myfooter></myfooter>      </footer>
+      <!-- /.container -->
+      
+      <!-- jQuery -->
+      <script src="js/jquery.js"></script>
+      <!-- Bootstrap Core JavaScript -->
+      <script src="js/bootstrap.min.js"></script>
+    </div>
+   
+</body>
+</html>

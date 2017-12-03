@@ -1,0 +1,131 @@
+<!--  Self registration form for Students -->
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+</head>
+<body>
+  <!-- Navigation -->
+ <navbar></navbar>
+  <!-- Page Content -->
+  <!-- Heading Row -->
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="col-sm-12 col-md-12" style="min-height:525px">
+        <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" [hidden]="!showForm"  novalidate>
+          <div class="row" style="padding-left:10px">
+            <h6 class="heading-text">Registration</h6>
+          </div>
+          <div class="row" style="padding-left:15px;padding-bottom:15px">
+            <div class="col-sm-12 col-md-12 panelbg" style="padding-left:45px;padding-top:10px">
+              <div class="row" style="padding-top:10px;">
+                <div class="col-md-5">
+                  <h6 class="body-text" style="padding-top:10px"><b> Training Programme Name : </b></h6>
+                </div>
+                <div class="col-md-7">
+                  <input class="form-control input-sm body-text"  style="width:85%;font-weight:bold" id="inputsm" type="text" value="UN SaferGuard Programme on the IATG, Libya, Dec 2016" disabled> </div>
+              </div>
+              <div class="row" style="padding-top:10px;">
+                <div class="col-md-5" style="padding-top:10px;">
+                  <h6 class="body-text"><b> Organization / Group : </b></h6>
+                </div>
+                <div class="col-md-7">
+                  <input class="form-control input-sm body-text" style="width:85%" id="inputsm" type="text" value="UNMAS Libya" disabled> </div>
+              </div>
+              <div class="row" style="padding-top:10px;">
+                <div class="col-md-5" style="padding-top:10px;">
+                  <h6 class="body-text"><b> Start &amp; End Date : </b></h6>
+                </div>
+                <div class="col-md-6 col-sm-10" >
+                  <input class="input-sm body-text"  style="height:30px;width:45%;float:left" type="text" value="DEC - 12 - 2016 9:00 AM GMT" disabled>
+                  <input class=" input-sm  body-text" type="text" style="height:30px;width:45%;float:right"  value="JAN - 12 - 2017 5:00 PM GMT" disabled> </div>
+              </div>
+              <div class="row" style="padding-top:10px;">
+                <div class="col-md-5"style="padding-top:10px;">
+                  <h6 class="body-text"><b> Programme Manager : </b></h6>
+                </div>
+                <div class="col-md-7" >
+                  <input class="form-control input-sm body-text heading-text" style="width:85%" id="inputsm" type="text" value="Linda Cooper" disabled> </div>
+              </div>
+              <div class="row" style="padding-top:10px;">
+                <div class="col-md-5 col-sm-4" style="padding-top:10px;">
+                  <h6 class="heading-text"> Create your Account</h6>
+                </div>
+                <div class="col-md-6 col-sm-6" style="padding-top:20px;text-align:right">
+                  <h6 class="body-text">
+                    <a href="http://localhost:4200/">Already have an account, click here to login</a>
+                  </h6>
+                </div>
+              </div>
+              <div class="row" style="padding-top:10px;">
+                <div class="col-md-5" style="padding-top:10px;">
+                  <h6 class="body-text"><b> {{userRole}} Name : </b></h6>
+                </div>
+                <div class="col-md-7" >
+                  <input class="form-control input-sm body-text heading-text" style="width:85%" id="inputsm" type="text" value="Philip Morris"> </div>
+              </div>
+              <div class="row" style="padding-top:10px;">
+                <div class="col-md-5" style="padding-top:10px;">
+                  <h6 class="body-text"><b> {{userRole}} Email Address : </b></h6>
+                </div>
+                <div class="col-md-7">
+                  <input class="form-control input-sm body-text heading-text" style="width:85%" id="inputsm" type="text" value="philip.morris@hisemail.com"> </div>
+              </div>
+              <div class="row" style="padding-top:10px;">
+                <div class="col-md-5" style="padding-top:10px;">
+                  <h6 class="body-text"><b> Organization : </b></h6>
+                </div>
+                <div class="col-md-7">
+                  <input class="form-control input-sm body-text heading-text" style="width:85%" id="inputsm" type="text" value="Libya Weapons and Ammunition Study"> </div>
+              </div>
+              <div class="row" style="padding-top:10px;">
+                <div class="col-md-5" style="padding-top:10px;">
+                  <h6 class="body-text"><b> Password : </b></h6>
+                </div>
+                <div class="col-md-7">
+                  <input class="form-control input-sm body-text heading-text" style="width:85%" id="inputsm" type="password" value="LibyaIs"> </div>
+              </div>
+              <div class="row" style="padding-top:10px;">
+                <div class="col-md-5" style="padding-top:10px;">
+                  <h6 class="body-text"><b> Repeat Password : </b></h6>
+                </div>
+                <div class="col-md-7">
+                  <input class="form-control input-sm body-text heading-text" style="width:85%" id="inputsm" type="password" value="LibyaIs"> </div>
+              </div>
+              <div class="row" style="padding-top:10px;">
+              <div class="col-sm-11 col-md-11 col-lg-11 image-align" style="text-align:right" >
+                  <span>
+                    <button type="submit"  class="submit-btn-style body-text">
+                       Submit 
+                    </button>
+                    </span>
+                <span style="padding-right:10px;padding-left:10px">
+                    <button type="button" (click)="onCancel()" class="cancel-btn-style body-text">
+                       Cancel 
+                    </button>
+                    </span>
+               </div>
+            </div>
+          </div>
+        </div>
+      </form>
+      <label [hidden]="showForm"  class="body-text">{{userMsg}}</label>
+      </div>
+  
+    <!-- /.row -->
+    <!--/.container-->
+    <!--footer-->
+     <footer>
+      <myfooter></myfooter>      </footer>
+    <!-- /.container -->
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+  </div>
+  </div>
+    </div>
+</body>
+</html>

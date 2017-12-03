@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js" crossorigin="anonymous"></script>
+  <script data-require="angular.js@1.4.x" src="https://code.angularjs.org/1.4.12/angular.js" data-semver="1.4.9"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+  <!-- Navigation -->
+  <navbar></navbar>
+  <!-- Page Content -->
+  <!-- Heading Row -->
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 col-sm-12">
+        <div class="row display-flex">
+          <div class="col-md-2 right-margin">
+            <!--Left Navigation-->
+            <left-nav></left-nav>
+          </div>
+          <!--col-sm-2-->
+          <div class="col-sm-12 col-md-10 " style="min-height:525px">
+            <div class="row" style="padding-left:15px;padding-top:10px">
+              <h6 class="heading-text"> Dashboard </h6>
+            </div>
+            <!--/.com-sm-10-->
+            <div *ngFor="let training of Training">
+              <div class="row" style="padding-left:15px;padding-bottom:15px;">
+                <div class="col-sm-12 col-md-12 panelbg" style="padding-left:10px;padding-top:15px">
+                  <div class="row" style="padding-top:10px;">
+                    <div class="col-md-5" style="padding-top:10px;">
+                      <h6 class="body-text">
+                        <b>Training Programme Name: </b>
+                      </h6>
+                    </div>
+                    <div class="col-md-7">
+                        {{training.trainingName}}
+                    </div>
+                  </div>               
+                  <div class="row" style="padding-top:10px;">
+                    <div class="col-md-5" style="padding-top:10px;">
+                      <h6 class="body-text">
+                        <b>Start &amp; End Date:</b>
+                      </h6>
+                    </div>
+                    <div class="col-md-7 ">
+                      <span style="padding-right:10px">
+                          {{training.trainingFromDate}}
+                      </span>
+                      {{training.trainingToDate}} </div>
+                  </div>
+                  <div class="row" style="padding-top:10px;">
+                    <div class="col-md-5" style="padding-top:10px;">
+                      <h6 class="body-text">
+                        <b> Manager Name &amp; Email :</b>
+                      </h6>
+                    </div>
+                    <div class="col-md-7">
+                      <span style="padding-right:10px">
+                        <input class="input-sm body-text" id="inputsm" style="width:41%" type="text" [(ngModel)]="name" required>
+                      </span>
+                      <input class="input-sm body-text" id="inputsm" type="text" style="width:41%" [(ngModel)]="email" required>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-12 col-md-12 body-text" style="padding-top:20px;float:left">
+                      <input type="checkbox" id="notifychkbox" [(ngModel)]="checkboxValue" name="checkboxValue"> &nbsp; Notify newly added Students
+                    </div>
+                  </div>
+                  <div class="row" style="text-align:right;padding-bottom:50px">
+                    <div class="col-sm-10 col-md-11 image-align" style="float:left">
+                      <span style="padding-right:5px">
+
+                        <button class="submit-btn-style body-text" type="submit" (click)="Save()">
+                          <h6> Save </h6>
+                        </button>
+                      </span>
+
+                      <span style="padding-right:5px">
+                        <button (click)="onCancel()" class="cancel-btn-style body-text" style="float:right">
+                          <h6> Cancel </h6>
+                        </button>
+                      </span>
+
+
+                    </div>
+                  </div>
+                  <div class="row" style="text-align:right;padding-bottom:50px">
+                    <span style="padding-right:5px; color: green;" *ngIf="isSaved">
+                      Manager added successfully!
+                    </span>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /.row -->
+    <!--/.container-->
+    <!--footer-->
+    <footer>
+      <myfooter></myfooter>
+    </footer>
+    <!-- /.container -->
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+  </div>
+</body>

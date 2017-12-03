@@ -1,0 +1,37 @@
+<!--  Dynamic creation of form based on the data -->
+<div [formGroup]="form" class="col-md-12 col-sm-12">
+  <label [attr.for]="question.key" class="heading-text" style="padding-left:15px;padding-top:20px;">{{question.label}}</label>
+  	<div [ngSwitch]="question.controlType">
+
+	<!-- If Form Control is a Textbox  -->
+	<div *ngSwitchCase="'textbox'" style="padding-left:20px; padding-bottom:15px">
+    	<input  [formControlName]="question.key" [name]="question.key"
+            [id]="question.key" [type]="question.type"  style="width:90%" [required]="question.required">
+   			<div *ngIf="!form.controls[question.key].valid" class = "alert-danger body-text">
+   			Please enter an answer</div>
+    </div>
+    
+    <div *ngSwitchCase="'radio'"  class="btn-group-vertical" style="padding-left:5px; padding-bottom:10px;">
+    <form role="form" >
+  	<!-- If Form Control is a Radio Button render Vertical Radio Buttons -->
+		<div class="form-group">
+ 		<div style="padding-left:25px" class="input-group body-text radio" role="group"  *ngFor="let opt of question.options;let idx = index" required>
+    		<label class="btn well zero-padding body-text" style="background:none">
+        		<input aria-label="Radio button"  type="radio" [name]="question.key" [required]="question.required" [checked]="idx === 0">{{opt.key}}
+           	</label>
+    	</div>
+   </div>
+ 	
+</form> 	</div>
+ 	<!-- If Form Control is a Image Radio Button render Radio Buttons with Image -->
+ 	<div *ngSwitchCase="'img-radio'"  class=" btn-group row" data-toggle="buttons" style="padding-left:5px; padding-bottom:20px">
+ 		<div style="padding-left:5px" class="input-group body-text col-md-3 col-sm-3 col-lg-3 "  *ngFor="let opt of question.options;let idx = index">
+ 			 <label for="{{opt.value}}" class="btn btn-default" style="background:none">
+ 			 	<input aria-label="Radio button" type="radio" name="{{question.key}}" id="{{opt.value}}" [checked]="idx === 0">
+             	<img src="{{opt.key}}" alt=""/>
+			 </label>
+         </div>
+ 	</div>
+ </div> 
+ <!--<div class="errorMessage" *ngIf="!isValid">Please enter an answer!</div>-->
+</div>

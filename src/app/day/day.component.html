@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+<body>
+  <!-- Navigation -->
+   <navbar></navbar>
+  <!-- Page Content -->
+  <!-- Heading Row -->
+  <div class="container" *ngFor="let training of Training">
+    <div class="row">
+      <div class="col-sm-12 col-md-12">
+        <div class="row display-flex">
+          <div class="col-md-3 col-lg-2 image-align right-margin block-style">
+            <div class="row">
+              <div class="col-lg-10 col-md-9 image-align">
+                <div class="panelbg heading-text panel-border image-align text-center" style="display:table;"> 
+                <span class="heading-text image-align" style="display:table-cell;vertical-align:middle;">
+                  {{training.trainingName}}
+                  </span> </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+              <!--Left Navigation-->
+              <nav class="nav navbar-toggleable-xs navbar-light bg-faded">
+              <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+					    <span class="navbar-toggler-icon"></span>
+  						</button>
+  						<div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="nav flex-column body-text">
+            <li><h6 class="heading-text"> Course Home </h6>
+            	<ul class="nav flex-column body-text" data-ng-init="active = true">
+            		<li *ngFor="let day of DAYS" class="nav_item">
+        				<a class="nav-link" (click)="onClicked(day)" *ngIf = "day === selectedDay" class="dayitemselected">{{day.title}}</a>
+        				<a class="nav-link" (click)="onClicked(day)" *ngIf = "day !== selectedDay" class="nav-link">{{day.title}}</a>
+        			</li>
+            	</ul>
+			</li>
+			<li><h6 class="heading-text"> Grades </h6></li>
+			<li><h6 class="heading-text"> Course Info </h6></li>
+            </ul>
+            </div>
+                </nav>
+              </div>
+            </div>
+          </div>
+          <!--col-sm-2-->
+          <div class="col-lg-10 col-md-9 ">
+            <div class="row  panel-margin" style="padding-top:15px">
+              <h5 class="heading-text"> {{training.trainingName}}, {{training.trainingPlace}}, {{training.trainingMonth}} </h5>
+            </div>
+            <div class="row  panel-margin">
+              <h6 class="heading-text"> Lessons </h6>
+            </div>
+            <!--/.com-sm-10-->
+            <!-- Show all the Lessons -->
+            <div *ngFor="let lesson of LESSONS">
+            <div class="row panel-margin">
+              <div class="col-sm-12 col-md-12  panelbg">
+              <div class="row">
+                <div class="col-sm-2 col-md-1  zero-padding">
+                  <img src={{lesson.thumbnail}} alt="" class="thumbnail-align"> </div>
+                <div class="col-sm-9 col-md-10 panel-margin">
+                  <h6 class="heading-text image-align zero-padding" style="margin-top:5px">
+                      <a [routerLink]="['./lessons', lesson.id]" style="color:black" >{{lesson.title}}</a> </h6> 
+                  <div class="body-text">{{lesson.body}}</div>
+                 </div>
+                </div>
+              </div>
+            </div>
+            </div>
+            <br><br>
+            <div class="row  panel-margin">
+              <h6 class="heading-text"> Quiz </h6>
+            </div>
+            <div class="row panel-margin" style="padding-bottom:25px;">
+              <div class="col-sm-12  col-md-12  panelbg">
+              <div class="row">
+                <div class="col-sm-2 col-md-1  zero-padding">
+                  <img src="../assets/images/thumbnail.jpg" alt="" class="thumbnail-align"> </div>
+                <div class="col-sm-9 col-md-10  panel-margin">
+                  <h6 class="heading-text image-align zero-padding">
+                  <a [routerLink]="['/lessons/', 'quiz']" style="color:black" >Quiz 1</a></h6>
+                  <div class="body-text">Some thing has to be writ ten about quiz Some thing about quiz Some thing about quiz Some thing about quizSome thing about quiz Some thing about quiz Some andthing about quiz Some thing about quiz Some thing about quiz</div>
+                </div>
+              </div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /.row -->
+    <!--/.container-->
+    <!--footer-->
+    <footer>
+      <myfooter></myfooter>
+    </footer>
+    <!-- /.container -->
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+  </div>
+</body>
+</html>

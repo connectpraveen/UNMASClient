@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+<body>
+  <!-- Navigation -->
+<navbar></navbar>
+  <!-- Page Content -->
+  <!-- Heading Row -->
+  <div class="container" *ngFor="let training of Training" style="padding-left: 0px; padding-right: 0px;">
+  <div class="container" style="padding-left: 0px; padding-right: 0px;">
+    <div class="row image-align">
+      <div class="col-md-9 col-sm-10 col-lg-10 " >
+        <div class="col-md-12 col-sm-12 col-xs-12 panelbg" style="margin-right:5px">
+          <div class="row">
+            <div>
+              <h6 class="heading-text header-padding"> {{training.trainingName}}, {{training.trainingPlace}}, {{training.trainingMonth}} </h6>
+            </div>
+            <div class="row">
+              <div class="col-md-4 col-sm-6 col-lg-4">
+                <img src="../assets/images/UNMASLogo.png" alt="" class="header-padding"> </div>
+              <div class="col-md-8 col-sm-8 col-lg-8 header-padding body-text"> Training: {{training.trainingName}}
+                <br> Scheduled Date: {{training.trainingFromDate}} - {{training.trainingToDate}}
+                <br>
+                <br> Created by UNMAS in collaboration with UNMAS Libya Mission </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class=" col-md-3 col-sm-4 col-lg-2 panelbg small-screen">
+        <div class="row">
+          <div class="col-md-12 col-sm-12">             
+            <div class="button-padding" style="text-align:center">
+              <button type="button" (click)="EnrollClick()" class="btn btn-primary btn-md btn-custom body-text" style="width:95%"> <b>{{Enroll}}</b>
+                <br> Starts Today</button>                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- /.row -->
+  <div class="container">
+    <h6 class="small-heading-text"> About {{training.trainingName}} </h6><span class="body-text">{{training.body}}</span></div>
+  <div class="container">
+    <div class="row panel-padding">
+      <div class="col-md-4 col-lg-4 col-sm-8">
+        <div class="row" style="margin-right:10px">
+          <div class="col-sm-3 col-lg-3 col-md-4">
+            <img src="../assets/images/Exams.jpg" alt="" class="image-size"> </div>
+          <div class="col-md-8 col-sm-9 col-lg-9">
+            <h6 class="heading-text"><a [routerLink]="['./courses','1']">1 Course</a></h6><span class="body-text">All different courses are listed out by days schedule </span></div>
+        </div>
+      </div>
+      
+      <div class="col-md-4 col-lg-4 col-sm-8">
+        <div class="row" style="margin-right:10px">
+          <div class="col-sm-3 col-lg-3 col-md-4">
+            <img src="../assets/images/Exams.jpg" alt="" class="image-size"> </div>
+          <div class="col-md-8 col-sm-9 col-lg-9">
+            <h6 class="heading-text">1 Exam</h6><span class="body-text">Something to write here about Exams and related  </span></div>
+        </div>
+      </div>
+   
+      <div class="col-md-4 col-lg-4 col-sm-8 ">
+        <div class="row">
+          <div class="col-sm-3 col-lg-3 col-md-4">
+            <img src="../assets/images/Exams.jpg" alt="" class="image-size"> </div>
+          <div class="col-md-8 col-sm-9 col-lg-9">
+            <h6 class="heading-text">1 Quiz</h6><span class="body-text">Something to write here about Quizes and surprise quizes</span> </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <h6 class="small-heading-text"> Courses </h6> <span class="body-text">{{training.courseContent}}</span> </div>
+  <!-- Footer -->
+  <footer>
+    <myfooter></myfooter>
+  </footer>
+  </div>
+  <!-- /.container -->
+  <!-- jQuery -->
+  <script src="js/jquery.js"></script>
+  <!-- Bootstrap Core JavaScript -->
+  <script src="js/bootstrap.min.js"></script>
+</body>
+
+</html>

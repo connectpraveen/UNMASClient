@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+</head>
+
+<body>
+  <!-- Navigation -->
+  <navbar></navbar>
+  <!-- Page Content -->
+  <!-- Heading Row -->
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="row display-flex">
+          <div class="col-md-2 right-margin">
+            <!--Left Navigation-->
+            <nav class="nav navbar-toggleable-xs navbar-light">
+              <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="nav flex-column body-text">
+                  <li>
+                    <h6 class="heading-text">
+                      <span class="dayitemselected"></span>
+                    </h6>
+                    <ul class="nav flex-column body-text">
+                      <li *ngFor="let lesson of LESSONS" class="nav_item">
+                        <a class="nav-link" (click)="onClickedLesson(lesson)" *ngIf="lesson === selectedLesson" class="navitemselected nav-link">{{lesson.title}}</a>
+                        <a class="nav-link" (click)="onClickedLesson(lesson)" *ngIf="lesson !== selectedLesson" class="nav-link">{{lesson.title}}</a>
+                      </li>
+                    </ul>
+                  </li>
+                  <li>
+                    <h6 class="heading-text"> Quiz </h6>
+                    <ul class="nav flex-column body-text">
+                      <li class="nav-item">
+                        <a class="nav-link" [routerLink]="['./lessons', 'quiz']" (click)="onClickedQuiz()">Quiz 1</a>
+                      </li>
+                    </ul>
+                  </li>
+                  <li>
+                    <h6 class="heading-text"> Assignment </h6>
+                    <ul class="nav flex-column body-text">
+                      <li class="nav-item">
+                        <a class="nav-link" [routerLink]="['./lessons', 'assignment']" href="" (click)="onClickedAssignment()">Assignment 1</a>
+                      </li>
+                    </ul>
+                  </li>
+                  <li>
+                    <h6 class="heading-text">Finals </h6>
+                    <ul class="nav flex-column body-text">
+                      <li class="nav-item">
+                        <a class="nav-link" [routerLink]="['./lessons', 'exam']" href="" (click)="onClickedExam()">Test</a>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+            </nav>
+          </div>
+          <!--  check lesson type to show template(video, picture, voice to text reader, quiz etc) -->
+          <div class="col-sm-12 col-md-10" style="min-height:525px">
+            <!-- 
+           <div  *ngIf="lesson=='picture' then template2;">
+          </div>
+           <div  *ngIf="lesson=='voicetotext' then template3;">
+          </div>
+        
+          <div  *ngIf="lesson=='assignment' then template5;">
+          </div>
+          <div  *ngIf="lesson=='exam' then template6;">
+          </div>
+          <div  *ngIf="lesson=='transalate' then template7;">
+          </div> -->
+            <div *ngIf="lesson!='quiz' then template1;">
+            </div>
+            <div *ngIf="lesson=='quiz' then template4;">
+            </div>
+            <!--  Show template 1 if lessonType is Video -->
+
+            <ng-template #template1>
+              <div *ngFor="let chapter of CHAPTERS | paginate: {itemsPerPage: 1, currentPage:page, id: '1'}; let i = index">
+                <div *ngIf="chapter.chaptertype=='text'">
+                  <div class="row" style="padding-left:25px;padding-top:10px">
+                    <h4 class="heading-text">{{chapter.chaptertype}}</h4>
+                  </div>
+
+                  <div class="row" style="padding-left:25px;padding-top:10px">
+                    <h6 class="heading-text">{{chapter.title}} (Text Based)</h6>
+                  </div>
+                  <div class="row image-align">
+                    <div class="col-md-12 body-text"> {{chapter.body}}</div>
+                  </div>
+                </div>
+                <div *ngIf="chapter.chaptertype=='video'">
+                  <div class="row" style="padding-left:25px;padding-top:10px">
+                    <h6 class="heading-text"> {{chapter.title}}(Video Based) </h6>
+                    <div class="embed-responsive embed-responsive-16by9">
+                      <iframe [src]="sanitizer.bypassSecurityTrustResourceUrl(chapter.path)" allowfullscreen="" height="315" width="560" style="border:5px solid #eeeeee"></iframe>
+                    </div>
+                  </div>
+                  <br>
+                  <div class="row image-align">
+                    <div class="col-md-12 body-text"> {{chapter.body}} </div>
+                  </div>
+                </div>
+                <div *ngIf="chapter.chaptertype=='image'">
+                  <div class="row" style="padding-left:25px;padding-top:10px">
+                    <h6 class="heading-text">{{chapter.title}} (Picture Based)</h6>
+                    <img src="{{chapter.path}}" alt="Responsive image" class="img-responsive img-fluid picture-size">
+
+                  </div>
+                  <div class="row image-align">
+                    <div class="col-md-12 body-text"> {{chapter.body}}</div>
+                  </div>
+                </div>
+
+                <div *ngIf="chapter.chaptertype=='audio'">
+                  <div class="row" style="padding-left:15px;padding-top:10px">
+                    <h6 class="heading-text"> {{chapter.title}}(Text to Voice Reader) </h6>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <div class="row  image-align">
+                        <div class="col-sm-11 col-md-11 col-lg-11 image-align" style="float:left">
+                          <span style="padding-right:5px">
+                            <button type="button" style="height:30px;width:20%" (click)="onPlay()">
+                              <span class="button-text">Play &nbsp;</span>
+                              <i class="fa fa-play" aria-hidden="true"></i>
+                            </button>
+                          </span>
+                          <span style="padding-right:5px">
+                            <button type="button" style="height:30px;width:20%" (click)="onPause()">
+                              <span class="button-text">Pause &nbsp;</span>
+                              <i class="fa fa-pause" aria-hidden="true"></i>
+                            </button>
+                          </span>
+                          <span style="padding-right:5px">
+                            <select class="selectpicker" style="height:30px;width:25%" (change)="onVoiceSelect($event.target)">
+                              <option *ngFor="let voice of voices" value={{voice.name}}>{{voice.name}}</option>
+                            </select>
+                          </span>
+                          <span style="padding-right:5px">
+                            <select class="selectpicker" style="width:20%;height:30px" (change)="onSpeedSelect($event.target.value)">
+                              <option value="0">Speed 0</option>
+                              <option value="0.5">Speed 0.5</option>
+                              <option value="1">Speed 1</option>
+                              <option value="1.5">Speed 1.5</option>
+                              <option value="2">Speed 2</option>
+                            </select>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row" style="padding-left:20px">
+                    <div class="body-text" style="border:1px solid #eeeeee;"> {{chapter.body}}</div>
+                  </div>
+                </div>
+              </div>
+
+
+
+              <pagination-controls (pageChange)="page = $event" id="1" maxSize="50" directionLinks="true" autoHide="true">
+              </pagination-controls>`
+
+
+
+
+            </ng-template>
+            <!-- </ng-template> -->
+            <!--  Show template 4 if lessonType is Quiz -->
+            <ng-template #template4>
+              <div class="row" style="padding-left:10px;padding-top:10px">
+                <h6 class="heading-text">Final Quiz - Questions</h6>
+              </div>
+              <div class="row" style="padding-bottom:15px;padding-left:15px;">
+                <div class="col-sm-12 panelbg" style="padding-left:10px">
+                  <div class="row image-align">
+                    <div *ngFor="let question of questions" class="form-row">
+                      <df-question [question]="question" [form]="form"></df-question>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-12 panelbg" style="padding-left:10px">
+                  <div class="row image-align">
+                    <div class="col-sm-12 image-align body-text"> ...... more questions will be listed here </div>
+                  </div>
+                  <div class="row image-align">
+                    <div class="col-sm-6 col-md-6 col-lg-4 image-align">
+                      <button type="submit" (click)="onSubmitQuiz()" class="btn btn-sm" style="width:25%px">
+                        <h6 class="body-text"> Submit </h6>
+                      </button>
+                      <span style="padding-left:20px">
+                        <button type="button" class="btn btn-sm" style="width:25%px;">
+                          <h6 class="body-text" (click)="onCancelQuiz()"> Cancel </h6>
+                        </button>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </ng-template>
+            <ng-template #template5>
+              <div class="row" style="padding-left:10px;padding-top:10px">
+                <h6 class="heading-text">Exercises</h6>
+              </div>
+              <div class="row" style="padding-left:15px;padding-bottom:15px">
+                <div class="col-sm-12 panelbg" style="padding-left:10px">
+                  <div class="row image-align">
+                    <div *ngFor="let question of questions" class="form-row">
+                      <df-question [question]="question" [form]="form"></df-question>
+                    </div>
+                  </div>
+                  <div class="row image-align">
+                    <div class="col-sm-12 image-align body-text"> ...... more questions will be listed here </div>
+                  </div>
+                  <div class="row image-align">
+                    <div class="col-sm-6 col-md-6 col-lg-4 image-align">
+                      <button type="submit" class="btn btn-sm" (click)="onSubmitExercises()" style="width:25%">
+                        <h6 class="body-text"> Submit </h6>
+                      </button>
+                      <span style="padding-left:20px">
+                        <button type="button" class="btn btn-sm" (click)="onCancelExercises()" style="width:25%">
+                          <h6 class="body-text"> Cancel </h6>
+                        </button>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </ng-template>
+
+            <ng-template #template6>
+              <div class="row" style="padding-left:10px;padding-top:10px">
+                <h6 class="heading-text">Final Exam - Questions</h6>
+              </div>
+              <div class="row" style="padding-left:15px;padding-bottom:15px">
+                <div class="col-sm-12 panelbg" style="padding-left:10px">
+                  <div class="row image-align">
+                    <div *ngFor="let question of questions" class="form-row">
+                      <df-question [question]="question" [form]="form"></df-question>
+                    </div>
+                  </div>
+                  <div class="row image-align">
+                    <div class="col-sm-12 image-align body-text"> ...... more questions will be listed here </div>
+                  </div>
+                  <div class="row image-align">
+                    <div class="col-sm-6 col-md-6 col-lg-4 image-align">
+                      <button type="submit" class="btn btn-sm" (click)="onSubmitExam()" style="width:25%">
+                        <h6 class="body-text"> Submit </h6>
+                      </button>
+                      <span style="padding-left:20px">
+                        <button type="button" class="btn btn-sm" (click)="onCancelExam()" style="width:25%">
+                          <h6 class="body-text"> Cancel </h6>
+                        </button>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </ng-template>
+
+
+            <!--  Show template 7 if lessonType is Google Translate -->
+            <ng-template #template7>
+              <div class="row" style="padding-left:15px;padding-top:10px">
+                <h6 class="heading-text"> {{selectedLesson.title}}(Transalate) </h6>
+              </div>
+              <div class="row">
+                <div class="col-sm-12">
+                  <div class="row  image-align">
+                    <div class="col-sm-11 col-md-11 col-lg-11 image-align" style="float:left">
+                      <span style="padding-right:5px">
+                        <button type="button" style="height:30px;width:20%" (click)="onPlay()">
+                          <span class="button-text">Play &nbsp;</span>
+                          <i class="fa fa-play" aria-hidden="true"></i>
+                        </button>
+                      </span>
+                      <span style="padding-right:5px">
+                        <button type="button" style="height:30px;width:20%" (click)="onPause()">
+                          <span class="button-text">Pause &nbsp;</span>
+                          <i class="fa fa-pause" aria-hidden="true"></i>
+                        </button>
+                      </span>
+                      <span style="padding-right:5px">
+                        <select class="selectpicker" style="height:30px;width:25%" (change)="onVoiceSelect($event.target)">
+                          <option *ngFor="let voice of voices" value={{voice.name}}>{{voice.name}}</option>
+                        </select>
+                      </span>
+                      <span style="padding-right:5px">
+                        <select class="selectpicker" style="width:20%;height:30px" (change)="onSpeedSelect($event.target.value)">
+                          <option value="0">Speed 0</option>
+                          <option value="0.5">Speed 0.5</option>
+                          <option value="1">Speed 1</option>
+                          <option value="1.5">Speed 1.5</option>
+                          <option value="2">Speed 2</option>
+                        </select>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row" style="padding-left:20px">
+                <div class="body-text" style="border:1px solid #eeeeee;"> {{selectedChapter.body}}</div>
+              </div>
+            </ng-template>
+            <!--  end translate -->
+
+
+          </div>
+          <!-- /.row -->
+        </div>
+        <!--/.container-->
+        <!--footer-->
+        <footer>
+          <myfooter></myfooter>
+        </footer>
+        <!-- /.container -->
+        <!-- jQuery -->
+        <script src="js/jquery.js"></script>
+        <!-- Bootstrap Core JavaScript -->
+        <script src="js/bootstrap.min.js"></script>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

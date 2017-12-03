@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head> 
+<body>
+  <!-- Navigation -->
+  <navbar></navbar>
+  <!-- Page Content -->
+  <!-- Heading Row -->
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="row display-flex">
+          <div class="col-md-2 right-margin">
+            <!--Left Navigation-->
+            <left-nav></left-nav>
+          </div>
+          <!--col-sm-2-->
+          <div class="col-sm-12 col-md-10" style="min-height:525px">
+          <div  *ngIf="show=='all-modules' then template1;">
+          </div>
+          <div  *ngIf="show=='show-modules' then template2;">
+          </div>
+          <div  *ngIf="show=='add-module' then template3;">
+          </div>
+          <!-- Template shown when user clicks All Modules link -->
+          <ng-template #template1>
+            <div class="row panel-margin" style="padding-top:5px;padding-left:15px;">
+               <h6 class="heading-text"> All Modules</h6>
+             </div>
+            <div class="container" *ngFor="let module of Modules">
+            <div class="row panel-margin" style="padding-top:20px;padding-bottom:10px">
+              <div class="col-sm-12  col-md-12 col-lg-12 panelbg zero-padding">
+              <div class="row">
+                <div class="col-lg-1 col-sm-2 col-md-1">
+                  <img src="{{module.thumbnailsrc}}" alt="" class="thumbnail-align"> </div>
+                <div class="col-sm-8 col-md-6 col-lg-7 panel-margin">
+                  <h6 class="heading-text image-align zero-padding">{{module.moduleName}}</h6>
+                  <div class="body-text"> Created By: {{module.createdBy}}
+                    <br> Scheduled Date:{{module.createdDate}}</div>
+                </div>
+                 <div class="col-sm-5 col-md-4 col-lg-3 panel-margin image-align" style="padding-top:10px;padding-right:30px;padding-bottom:20px">
+                  <div>
+                    <button type="button" class="btn btn-sm button-view-style show-detail-size">
+                      <h4 class="body-text" style="color:white"> Show more
+                        <br> Details</h4>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              </div>
+            </div>
+            </div>
+           </ng-template>
+           <!-- Template shown when user clicks Show Modules of a particular Course -->
+           <ng-template #template2>
+              <div class="row  panel-margin" style="padding-top:10px">
+              <h6 class="heading-text"> UN SaferGuard on the IATG, Libya, Dec
+                <br><span style="padding-left:40px;">- &gt; </span>UN SaferGuard on the IATG
+                <br><span style="padding-left:80px">- &gt; SG1: Ammunition Support to UN Field Operations</span></h6>
+            </div>
+            <!--/.com-sm-10-->
+            
+            <div class="row panel-margin" style="padding-top:5px;padding-left:15px;">
+               <h6 class="heading-text"> Modules List </h6>
+             </div>
+            <div class="container" *ngFor="let module of Modules">
+            <div class="row panel-margin" style="padding-top:10px;padding-bottom:10px">
+              <div class="col-sm-12  col-md-12 col-lg-12 panelbg zero-padding">
+              <div class="row">
+                <div class="col-lg-1 col-sm-2 col-md-1">
+                  <img src="{{module.thumbnailsrc}}" alt="" class="thumbnail-align"> </div>
+                <div class="col-sm-8 col-md-6 col-lg-7 panel-margin">
+                  <h6 class="heading-text image-align zero-padding">{{module.moduleName}}</h6>
+                  <div class="body-text"> Created By: {{module.createdBy}}
+                    <br> Scheduled Date:{{module.createdDate}}</div>
+                </div>
+                 <div class="col-sm-5 col-md-4 col-lg-3 panel-margin image-align" style="padding-top:10px;padding-right:30px;padding-bottom:20px">
+                  <div>
+                    <button type="button" class="btn btn-sm button-view-style show-detail-size">
+                      <h4 class="body-text" style="color:white"> Show more
+                        <br> Details</h4>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              </div>
+            </div>
+            </div>
+            <div style="padding-top:20px;padding-left:10px"> <span class="body-text panel-margin">List of all Modules below. . . . . . . . . . . . . . . . . . . .</span> </div>
+            <div class="row panel-margin " style="padding-top:50px">
+              <div class="col-md-12 add-new">
+                <div class="row">
+                     <div class="col-md-12 col-sm-12 zero-padding body-text" style="padding-right:10px;padding-bottom:30px;">
+                     <i class="fa fa-plus-circle fa-3x pull-right"  aria-hidden="true" (click)="onAddModule()" style="padding-right:10px"></i> 
+                         <span style="float:right;padding-top:10px">Add New Module</span>     
+                  </div>
+                </div>
+              </div>
+            </div>
+              </ng-template>
+              <!-- Show template when user clicks Add New Module link -->
+              <ng-template #template3>
+              <form>
+              <div class="row" style="padding-left:10px;padding-top:10px">
+              <h6 class="heading-text">Add New Module</h6>
+            </div>
+            <div class="row" style="padding-left:15px;padding-bottom:15px">
+              <div class="col-sm-12 col-md-12 panelbg" style="padding-left:10px;">
+                <div class="row" style="padding-top:10px;vertical-align:middle">
+                  <div class="col-md-5" style="padding-top:10px;">
+                    <h6 class="body-text"> <b>Training / Catalog Name:</b> </h6>
+                  </div>
+                  <div class="col-md-7"> <select class="selectpicker form-control zero-padding body-text" style="height:30px;width:85%">
+  							<option value="UN SaferGuard Training on the IATG">UN SaferGuard on ISACS</option>
+                    </select> </div>
+                </div>
+                <div class="row" style="padding-top:10px;">
+                  <div class="col-md-5" style="padding-top:10px;">
+                    <h6 class="body-text"><b> Course Name:</b> </h6>
+                  </div>
+                  <div class="col-md-7"> <select class="body-text selectpicker form-control zero-padding textbox-size" style="height:30px;width:85%">
+  							<option value="UN SaferGuard Training on the IATG">ISACS 1: Small Arms Control Standards for Libya </option>
+                    </select> </div>
+                </div>
+                <div class="row" style="padding-top:10px;">
+                  <div class="col-md-5" style="padding-top:10px;">
+                    <h6 class="body-text"><b> New Module Name:</b> </h6>
+                  </div>
+                  <div class="col-md-7">
+                    <input class="input-sm body-text" id="inputsm" type="text" value="ISACS 1: Small Arms Control Standards for Libya" style="width:85%"> 
+                    </div>
+                </div>
+                <div class="row" style="padding-top:10px;">
+                  <div class="col-md-5" style="padding-top:10px;">
+                    <h6 class="body-text"><b> Select Lesson/Materials:</b> </h6>
+                  </div>
+                  <div class="col-md-7 body-text"> 
+                  <select class="select-picker" multiple style="height:100px;width:85%"  >
+                       <option *ngFor="let course of Courses">{{course.courseName}}</option>
+    			 </select>
+                    <br>
+                    <img src="../assets/images/person.jpg">
+                    <a href="">Request admin to add new Materials for this Module</a>
+                  </div>
+                </div>
+                <div class="row image-align" style="text-align:right">
+                  <div class="col-sm-10 col-md-11 image-align" style="float:left">
+                  <span style="padding-right:5px">
+                    <button type="button" (click)="onSubmit()" class="submit-btn-style body-text">
+                      <h4 class="body-text"> Submit </h4>
+                    </button>
+                   </span>
+                   <span style="padding-right:5px">
+                    <button type="button" class="save-btn-style body-text">
+                      <h4 class="body-text"> Save as Draft </h4>
+                    </button>
+                    </span>
+                    <span style="padding-right:5px">
+                    <button type="button" class="cancel-btn-style body-text" style="float:right;">
+                      <h4 class="body-text"> Cancel </h4>
+                    </button>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            </form>
+              </ng-template>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /.row -->
+    <!--/.container-->
+    <!--footer-->
+    <footer>
+     <myfooter></myfooter>
+    </footer>
+    <!-- /.container -->
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+  </div>
+</body>
+          

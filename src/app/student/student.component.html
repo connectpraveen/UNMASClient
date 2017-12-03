@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="css/canvasjs.min.js"></script>
+</head>
+
+<body>
+  <!-- Navigation -->
+  <navbar></navbar>
+  <!-- Page Content -->
+  <!-- Heading Row -->
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="row display-flex">
+          <div class="col-md-2 right-margin">
+            <!--Left Navigation-->
+            <left-nav></left-nav>
+          </div>
+          <!--col-sm-2-->
+          <div class="col-sm-12 col-md-10" style="min-height:525px">
+            <div *ngIf="show=='students' then template1;">
+            </div>
+            <div *ngIf="show=='student-profile' then template2;">
+            </div>
+            <div *ngIf="show=='student-training-info' then template3;">
+            </div>
+            <div *ngIf="show=='invite-new' then template4;">
+            </div>
+            <!-- Show Template 1 if user clicks on all students -->
+            <ng-template #template1>
+              <div class="row" style="padding-left:10px;padding-top:10px">
+                <h6 class="heading-text">All Students</h6>
+              </div>
+
+              <div class="row" style="padding-left:15px;padding-bottom:15px">
+                <div class="col-sm-12 col-md-12 panelbg" style="padding-left:10px">
+                  <table class="table table-striped">
+                    <thead>
+                      <tr>
+                        <th width="10%"> </th>
+                        <th width="20%">Name</th>
+                        <th width="20%" class="center-align">Status</th>
+                        <th width="20%" class="center-align">Last Login</th>
+                        <th width="20%"></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr class="body-text" *ngFor="let student of STUDENTDETAILS">
+                        <td>
+                        
+                        <td>
+                          <div class="heading-text zero-padding">{{student.name}}</div>
+                          <div>{{student.email}}</div>
+                        
+                        </td>
+                        <td style="vertical-align:middle" class="center-align"></td>
+                        <td style="vertical-align:middle" class="center-align"></td>
+                        <!-- <td style="vertical-align:middle" class="center-align">
+                          <input type="button" id={{student.id}} class="btn btn-small view-profile-style" #elem (click)="onViewClick(elem.id)" value="View Profile"
+                            style="color:white">
+                        </td> -->
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="col-md-12 col-sm-12 zero-padding body-text" style="padding-right:10px;padding-bottom:30px;float:right">
+                  <i class="fa fa-plus-circle fa-3x pull-right" aria-hidden="true" (click)="onInviteClick()"></i>
+                  <span style="float:right;padding-top:10px">Invite more Students</span>
+                </div>
+              </div>
+            </ng-template>
+            <!-- Show Template 2 if user clicks on a particular student profile - View Profile -->
+            <ng-template #template2>
+              <div class="row panel-margin" style="padding-top:15px">
+                <div class="col-md-12 col-sm-12 zero-padding panel-margin">
+                  <label class="heading-text zero-padding" style="style=float:left">Student : {{student.name}}</label>
+                  <span style="float:right">
+                    <i class="fa fa-arrow-circle-o-left fa-2x" aria-hidden="true" (click)="goBack()"></i>
+                    <span class="heading-text" style="font-size:18px;vertical-align:bottom">
+                      Back</span>
+                  </span>
+                </div>
+              </div>
+              <div myMatchHeight="card" class="row panel-margin" style="padding-bottom: 20px">
+                <div class="col-lg-4 col-md-5 col-sm-5 card">
+                  <div class="row image-align" style="padding-left:20px">
+                    <div class="col-md-12 col-sm-12">
+                      <img src="{{student.pic}}" style="padding-top:10px;width:175px;height:175px" class="img-responsive">
+                      <h6 class="body-text"> Location: {{student.companyPlace}}</h6>
+                      <h6 class="body-text"> Last Login: {{student.lastLogin}} </h6>
+                    </div>
+                  </div>
+                  <div class="row image-align" style="padding-left:20px">
+                    <div class="col-md-12 col-sm-12">
+                      <h6 class="heading-text zero-padding"> Responsibilities </h6>
+                      <h6 class="body-text">Security Officer Libya Mission</h6>
+                      <h6 class="body-text">Teaching Faculty Libya Mission</h6>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-7 col-md-6 col-sm-6 card">
+                  <div class="row image-align">
+                    <div class="col-md-12 col-sm-12">
+                      <h6 class="heading-text zero-padding" style="padding-top:15px">Personal Info</h6>
+                      <h6 class="body-text">First Name: Don</h6>
+                      <h6 class="body-text">Middle Name: Davis</h6>
+                      <h6 class="body-text">Last Name: Miller</h6>
+                      <h6 class="body-text">Work Place: {{student.companyPlace}}</h6>
+                      <h6 class="body-text">Email: don.miller@unmasnewyork.org</h6>
+                      <h6 class="heading-text zero-padding" style="padding-top:15px">Enrolled Courses</h6>
+                      <h6 class="body-text">Advanced Security Measures</h6>
+                      <h6 class="body-text">Understanding Landmines</h6>
+                      <h6 class="body-text">Libya Mission 2017 - Security</h6>
+                      <h6 class="body-text">New York Training on Advanced Security</h6>
+                      <h6 class="heading-text zero-padding" style="padding-top:15px;">Certifications</h6>
+                      <h6 class="body-text">Certified Security Expert Libya</h6>
+                      <h6 class="body-text" style="padding-bottom:25px">Certified Security Faculty Libya</h6>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </ng-template>
+            <!-- Show Template 3 if program coordinator clicks on student training info -->
+            <ng-template #template3>
+              <div class="row"> </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <h6 class="heading-text"> Invited Students </h6>
+                </div>
+              </div>
+              <div class="row" style="padding-left:15px;padding-bottom:15px">
+                <div class="col-sm-12 col-md-12 panelbg" style="padding-left:10px">
+                  <table class="table table-striped">
+                    <thead>
+                      <tr>
+                        <th width="10%"> </th>
+                        <th width="20%">Name</th>
+                        <th width="20%">Email</th>                     
+                        <th width="30%"></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr class="body-text" *ngFor="let student of StudentDetails">
+                        <td>
+                        </td>
+                        <td>
+                          <div class="heading-text zero-padding">{{student.name}}</div>                       
+                        </td>
+                        <td> <div class="heading-text zero-padding">{{student.email}}</div></td>
+                        <td style="vertical-align:middle" class="center-align"></td>
+                        <td></td>
+                        <!-- <td style="vertical-align:middle" class="center-align">
+                          <input type="button" id={{student.id}} class="btn btn-small view-profile-style" #elem (click)="onViewClick(elem.id)" value="View Profile"
+                            style="color:white">
+                        </td> -->
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="col-md-12 col-sm-12 zero-padding body-text" style="padding-right:10px;padding-bottom:30px;">
+                  <i class="fa fa-plus-circle fa-3x pull-right" aria-hidden="true" (click)="onInviteClick()"></i>
+                  <span style="float:right;padding-top:10px">Invite more Students</span>
+                </div>
+              </div>
+            </ng-template>
+            <!-- Show Template 4 to invite new students -->
+            <ng-template #template4>
+              <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+                <div class="row" style="padding-left:10px;padding-top:10px">
+                  <h6 class="heading-text">Invite Students</h6>
+                </div>
+                <div class="row" style="padding-left:15px;padding-bottom:15px;">
+                  <div class="col-sm-12 col-md-12 panelbg" style="padding-left:10px;padding-top:15px">
+                    <div class="row" style="padding-top:10px;">
+                      <div class="col-md-5" style="padding-top:10px;">
+                        <h6 class="body-text">
+                          <b>Training Programme Name: </b>
+                        </h6>
+                      </div>
+                      <div class="col-md-7">
+                        <input class="form-control input-sm heading-text body-text" style="width:85%" id="inputsm" type="text" value="UN SaferGuard Programme on the IATG, Libya, Dec 2016"
+                          disabled> </div>
+                    </div>
+                    <!-- <div class="row" style="padding-top:10px;">
+                      <div class="col-md-5" style="padding-top:10px;">
+                        <h6 class="body-text">
+                          <b>Organization / Group:</b>
+                        </h6>
+                      </div>
+                      <div class="col-md-7">
+                        <input class="form-control input-sm body-text" style="width:85%" id="inputsm" type="text" value="UNMAS Libya" disabled> </div>
+                    </div> -->
+                    <!-- <div class="row" style="padding-top:10px;">
+                      <div class="col-md-5" style="padding-top:10px;">
+                        <h6 class="body-text">
+                          <b> Programme Manager Name:</b>
+                        </h6>
+                      </div>
+                      <div class="col-md-7">
+                        <input class="form-control input-sm body-text" style="width:85%" id="inputsm" type="text" value="Paul GRIMSLEY" disabled> </div>
+                    </div> -->
+                    <div class="row" style="padding-top:10px;">
+                      <div class="col-md-5" style="padding-top:10px;">
+                        <h6 class="body-text">
+                          <b>Start &amp; End Date:</b>
+                        </h6>
+                      </div>
+                      <div class="col-md-7 ">
+                        <span style="padding-right:10px">
+                          <input class="input-sm body-text" id="inputsm" style="width:41%" type="text" value="DEC - 12 - 2016 9:00 AM GMT" disabled>
+                        </span>
+                        <input class=" input-sm body-text" id="inputsm" type="text" style="width:41%" value="JAN - 12 - 2017 5:00 PM GMT" disabled> </div>
+                    </div>
+
+                    <!-- <div class="row" style="padding-top:10px;">
+                      <div class="col-md-5" style="padding-top:10px;">
+                        <h6 class="body-text">
+                          <b>Student Name &amp; Email: </b>
+                        </h6>
+                      </div>
+                      <div class="col-md-7 col-xs-6">
+                        <span style="padding-right:10px">
+                          <input class="input-sm body-text" id="inputsm1" style="width:41%" [(ngModel)]="name" type="text">
+                        </span>
+                        <input class=" input-sm body-text" id="inputsm2" type="text" [(ngModel)]="email" style="width:41%"> </div>
+                    </div> -->
+                    <div [formGroup]="myForm">
+                      <div formArrayName="studentsdata">
+                        <div *ngFor="let student of myForm.controls.studentsdata.controls; let i=index">
+                          <div [formGroupName]="i">
+                            <div class="row" style="padding-top:10px;">
+                              <div class="col-md-5" style="padding-top:10px;">
+                                <h6 class="body-text">
+                                  <b> Student Name &amp; Email :</b>
+                                </h6>
+                              </div>
+                              <div class="col-md-7">
+                                <span style="padding-right:10px">
+                                  <input class="input-sm body-text" id="inputsm"  style="width:41%" type="text" formControlName="name">
+                                </span>
+                                <input class="input-sm body-text" id="inputsm" type="text" style="width:41%" formControlName="email">
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-md-8 zero-padding">
+                          <div class="body-text" style="padding-bottom:30px;padding-left:15px">
+                            <a (click)="addHtml()">
+                              <img src="../assets/images/plus-in-circle.png">
+                            </a>
+                            <span class="body-text">Add more Student Name &amp; Email fields</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-12 col-md-12 body-text" style="padding-top:20px;float:left">
+                        <input type="checkbox" id="notifychkbox" [(ngModel)]="checkboxValue" name="checkboxValue"> &nbsp; Notify newly added Students
+                      </div>
+                    </div>
+                    <div class="row" style="text-align:right;padding-bottom:50px">
+                      <div class="col-sm-10 col-md-11 image-align" style="float:left">
+                        <span style="padding-right:5px">
+
+                          <button class="submit-btn-style body-text" type="submit" (click)="Save()">
+                            <h6> Save </h6>
+                          </button>
+                        </span>
+                        <span style="padding-right:5px">
+                          <button (click)="onCancel()" class="cancel-btn-style body-text" style="float:right">
+                            <h6> Cancel </h6>
+                          </button>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </form>
+              <button #openModal style="display:none" data-target="#emailModal" data-toggle="modal">showmodal</button>
+
+              <div class="modal modal-fullscreen fade" role="dialog" id="emailModal" tabindex="-1">
+                <div class="modal-dialog modal-lg">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button class="close" data-dismiss="modal">&times; </button>
+                    </div>
+                    <div class="modal-body">
+                      <email></email>
+                      <button class="btn" data-dismiss="modal">Cancel</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </ng-template>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /.row -->
+    <!--/.container-->
+    <!--footer-->
+    <footer>
+      <myfooter></myfooter>
+    </footer>
+    <!-- /.container -->
+    <!-- jQuery -->
+    <p> </p>
+    <script src="js/jquery.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+  </div>
+</body>

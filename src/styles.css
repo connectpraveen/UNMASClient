@@ -1,0 +1,450 @@
+/* You can add global styles to this file, and also import other style files */
+body {
+    padding-top: 10px;
+     /* Required padding for .navbar-fixed-top. Change if height of navigation changes. */
+}
+
+.navbartext{
+font-family:Corbel;
+font-size:24px;
+font-color:green;
+}
+
+.navbar-fixed-top .nav {
+    padding: 15px 0;
+}
+
+.navbar-fixed-top .navbar-brand {
+    padding: 0 15px;
+}
+
+.footer {
+    padding: 5px 0;
+    border-top:2px solid #eeeeee;
+}
+    
+.navbar-fixed-top .navbar-brand {
+        padding: 15px 0;
+    }
+
+.navbar-border{
+border-bottom: 3px solid #eeeeee;
+//padding-bottom:10px;
+}
+
+.panelbg{
+background:#eeeeee;
+cell-padding:0px;
+cell-spacing:0px;
+}
+
+.bgpanel{
+background:#eeeeee;
+}
+
+.panel-margin{
+margin:1px 1px 1px 20px;
+}
+
+.button-padding{
+padding: 20px 15px 18px 5px;
+}
+
+.picture-size{
+width:910px;
+height:450px;
+}
+
+.heading-text{
+padding: 5px 5px 5px 5px;
+font-weight:bold;
+}
+
+.small-heading-text{
+padding: 5px 5px 5px 0px;
+font-weight:bold;
+}
+
+.btn-align{
+align:top;
+margin:1px;
+}
+
+.header-padding{
+padding:5px 10px 10px 20px;
+}
+
+.panel-padding{
+padding:25px 5px 15px 5px;
+}
+
+.button-size{
+width:130px;
+}
+
+/*Remove rounded corners from button*/
+.btn.btn-custom {
+  border-radius: 0;
+}
+
+.image-align{
+padding:10px 10px 10px 10px;
+}
+
+.image-size
+{
+height:100px;
+width:70px;
+}
+
+.thumbnail-align{
+height:75px;
+width:75px;
+padding:8px 8px 8px 8px;
+}
+
+@media (min-width: 1200px) {
+    .panel-align {
+	padding-left:10px;
+    }}
+
+@media (max-width: 768px) and (min-width:576px) {
+    .small-screen {
+	margin-left:15px;
+	margin-top:5px;
+    }}
+@media (max-width: 576px) {
+    .small-screen {
+	margin-left:15px;
+	margin-top:5px;
+	margin-right:15px;
+    }}
+
+
+.zero-padding{
+padding:0px 0px 0px 0px;
+}
+
+
+.footer-text{
+font-family:Corbel;
+font-size:10px;
+font-color:#eeeeee;
+}
+
+.body-text{
+font-family:Corbel;
+font-size:14px;
+}
+
+.panel-border{
+border:1px solid #aaaaaa;
+align:center;
+}
+
+.right-margin{
+border-right: 3px solid #eeeeee;
+//height:100%;
+}
+
+
+
+
+.right-align{
+align:right;
+}
+
+.full-height{
+height:100%;
+overflow:auto;
+}
+
+.navitemselected{
+font-weight: bolder;
+}
+
+.dayitemselected{
+font-weight: bolder;
+background-color :#3299CC;
+color:white;
+display:inline;
+padding-left:0px;
+}
+.navbar {
+    margin-bottom:0;
+}
+
+.nav-link{
+	color:black;
+}
+
+.row.display-flex {
+  display: flex;
+  flex-wrap: wrap;
+}
+.row.display-flex > [class*='col-'] {
+  display: flex;
+  flex-direction: column;
+}
+
+
+.button-show-style
+{
+width:100px;background-color:#ffa31a;
+}
+
+.button-view-style{
+width:100px;background-color:#0099ff;
+}
+
+.view-profile-style
+{
+width:95%;background-color:#497542;font-color:white;
+word-wrap: break-word;
+white-space: normal
+}
+.center-align
+{
+text-align:center;
+vertical-align:middle;
+}
+
+.icon-size{
+width:10%;
+height:48px;
+background-color:#d3d3d3;
+}
+
+.icon-position{
+padding-top:20px;
+padding-bottom:10px;
+}
+
+.bckgndclass{ 
+ background-image: url('./assets/images/graph.png') no-repeat center center fixed; 
+ -webkit-background-size: cover;
+ -moz-background-size: cover;
+ -o-background-size: cover;
+ background-size: cover;
+}
+
+/*To position Add New at bottom right corner of page*/
+  .add-new {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+  }
+.screen{
+position: relative;
+}
+
+.fa-plus-circle {
+  color: #00bfff;
+}
+
+.show-detail-size{
+ width:80%;
+}
+
+/*To add watermark image in background*/
+
+.watermark{
+background:linear-gradient(rgba(0,0,0, 0.1), rgba(0,0,0, 0.1)), url(./assets/images/WatermarkUNLOGO.jpg) ;
+background-repeat:no-repeat;
+background-position:center;
+}
+
+/*To create left and right space in email*/
+.spacer{
+margin-left:75px;
+margin-right:75px;
+}
+
+.vertical-align {
+    display: flex;
+    align-items: center;
+justify-content: space-between;
+}
+.panel-style{
+background:#fafafa;
+border:1px solid #eeeeee;
+border-radius: 5px;
+}
+a.canvasjs-chart-credit{
+display:none;}
+
+.submit-btn-style{
+width:15%;height:40px;background-color:#00cc99;
+}
+
+.save-btn-style{
+width:25%;height:40px;background-color:#ffa366;
+}
+
+.cancel-btn-style{
+width:15%;height:40px;
+}
+
+@media screen and (max-width: 768px) and (min-width:576px) {
+	.submit-btn-style{
+	width:25%;
+	}
+	.save-btn-style{
+	width:38%;
+	}
+	.cancel-btn-style{
+	width:25%;
+	}
+}
+
+@media screen and (max-width:500px){
+	 .button-text {
+        display: none;
+    }
+}
+
+.dashitemselected{
+font-weight: bolder;
+background-color :#3299CC;
+color:white;
+display:inline;
+}
+a.active {
+font-weight: bolder;
+background-color :#3299CC;
+color:white;
+display:inline;
+}
+
+ 
+/*
+.modallg {
+   width: 100%;
+   position: absolute;
+   left: 5%;
+   top: 5%; 
+   margin-left: -15px;
+   margin-top: -15px;
+}
+.modal-content {
+  width: 1200px;
+  margin-left: -100px;
+}
+*/
+
+@media screen and (min-width: 768px) { 
+  .modal:before {
+    display: inline-block;
+    vertical-align: middle;
+    content: " ";
+    height: 100%;
+  }
+}
+
+
+.modal {
+  text-align: center;
+  padding: 0!important;
+}
+
+.modal:before {
+  content: '';
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+  margin-right: -4px; /* Adjusts for spacing */
+}
+
+.modal-dialog {
+  display: inline-block;
+  text-align: left;
+  vertical-align: middle;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+.panel-space{padding:0;}
+
+@media (min-width: 576px) { 
+.panel-space{padding-top:25px;padding-left:20px;text-align:center;
+	}}
+
+	@media only screen and (min-width: 768px) {
+    .collapse {
+        display: block;
+    }
+
+    .navbar-toggler {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+     .collapse {
+        display: none;
+     }
+
+     .navbar-toggler {
+        display: block;
+     }
+}
+
+@media screen and (max-width: 768px) {
+    .right-margin {
+	border:0px;
+    }
+    .block-style{
+    padding-left:50px;
+    }}
+    
+/* .modal-fullscreen size: we use Bootstrap media query breakpoints */
+
+.modal-fullscreen .modal-dialog {
+  margin: 0;
+  margin-right: auto;
+  margin-left: auto;
+  width: 100%;
+}
+@media (min-width: 768px) {
+  .modal-fullscreen .modal-dialog {
+    width: 750px;
+  }
+}
+@media (min-width: 992px) {
+  .modal-fullscreen .modal-dialog {
+    width: 970px;
+  }
+}
+@media (min-width: 1200px) {
+  .modal-fullscreen .modal-dialog {
+     width: 1170px;
+  }
+}
+
+/* centering styles for jsbin */
+html,
+body {
+  width:100%;
+  height:100%;
+}
+html {
+  display:table;
+}
+body {
+  display:table-cell;
+  vertical-align:middle;
+}
+body > .btn {
+  display: block;
+  margin: 0 auto;
+}
+
+.card{
+	border:solid 1px #cccccc;
+	margin:10px;
+}
+.datepicker-actions__button{
+display:none;
+}
