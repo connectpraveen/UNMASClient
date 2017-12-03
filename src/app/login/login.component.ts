@@ -55,7 +55,7 @@ export class LoginComponent implements OnInit {
           this.onLogin('student');
         }
       }                
-    }, 5000);
+    }, 8000);
   }
   newMessage(str) {
     this.sharedservice.changeMessage(str)
