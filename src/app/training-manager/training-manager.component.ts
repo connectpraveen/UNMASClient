@@ -12,7 +12,7 @@ import { TrainingDetail } from '../training-detail/training-detail'
 export class TrainingManagerComponent implements OnInit {
 
   Enroll: string;
-  checkboxValue: boolean = false;
+  checkboxValue: boolean = true;
   name: string="";
   email: string="";
   isSaved: boolean = false;

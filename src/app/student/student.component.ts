@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Validators, FormGroup, FormArray, FormBuilder } from '@angular/forms';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Student } from './student'
 import { StudentDetails } from './students'
 import { StudentService } from './student.service'
@@ -22,7 +23,7 @@ export class StudentComponent implements OnInit {
   StudentDetails: StudentDetails[];
   invitedStudents: Student[];
   student: Student;
-  checkboxValue: boolean;
+  checkboxValue: boolean = true;
   name: string;
   email: string;
   qtd: any[] = [];
@@ -61,7 +62,7 @@ export class StudentComponent implements OnInit {
 
   public barChartData: any[] = [{ data: [34, 0], label: 'Enrolled: 86%' }, { data: [16, 0], label: 'Pending: 14%' }];
 
-  constructor(private studentservice: StudentService, private _location: Location, private _fb: FormBuilder, private sharedservice: SharedDataService) { }
+  constructor(private router: Router,private studentservice: StudentService, private _location: Location, private _fb: FormBuilder, private sharedservice: SharedDataService) { }
 
   /* function to save the selected link in shared service, used to highlight left navigation */
   saveSelectedLink(selectedlink: string) {
@@ -97,9 +98,9 @@ export class StudentComponent implements OnInit {
     }
     else if (this.userRole === 'manager') {
       this.show = 'student-training-info';
-      this.StudentDetails=this.studentservice.getStudentDetail();
+      this.StudentDetails = this.studentservice.getStudentDetail();
       this.invitedStudents = this.studentservice.getInvitedStudents();
-      
+
     }
     this.saveSelectedLink('students');
     this.myForm = this._fb.group({
@@ -148,20 +149,20 @@ export class StudentComponent implements OnInit {
 
   /* function to invoke when user submits the invite new students form */
   onSubmit(): void {
-    if (this.userRole === 'admin')
-      this.show = 'students';
-    else if (this.userRole === 'manager')
-      this.show = 'student-training-info';
-    if (this.checkboxValue)
-      this.openModal.nativeElement.click();
+    // if (this.userRole === 'admin')
+    //   this.show = 'students';
+    // else if (this.userRole === 'manager')
+    //   this.show = 'student-training-info';
+    // if (this.checkboxValue)
+    //   this.openModal.nativeElement.click();
   }
 
   /* function to invoke when user clicks Save as Draft in the invite new students form */
   onSaveAsDraft() {
-    if (this.userRole === 'admin')
-      this.show = 'students';
-    else if (this.userRole === 'manager')
-      this.show = 'student-training-info';
+    // if (this.userRole === 'admin')
+    //   this.show = 'students';
+    // else if (this.userRole === 'manager')
+    //   this.show = 'student-training-info';
   }
 
   /* function to invoke when user clicks Cancel in the invite new students form */
@@ -173,14 +174,17 @@ export class StudentComponent implements OnInit {
   }
 
   Save() {
-    const control = <FormArray>this.myForm.controls['studentsdata'];    
-    for (let i = 0; i < control.controls.length; i++) {    
-      this.studentservice.saveStudents(control.controls[i].value.name,control.controls[i].value.email);
-     // this.studentservice.sendEmail(control.controls[i].value.email);
+    const control = <FormArray>this.myForm.controls['studentsdata'];
+    for (let i = 0; i < control.controls.length; i++) {
+      if (control.controls[i].value.name != undefined && control.controls[i].value.email != undefined)
+        this.studentservice.saveStudents(control.controls[i].value.name, control.controls[i].value.email);
+      // this.studentservice.sendEmail(control.controls[i].value.email);
+      setTimeout(() => {
+        this.router.navigate(['dashboard']);  
+        //console.log(this.UsersData);
+      }, 1000);
+      
     }
- setTimeout(() => {
-  this.StudentDetails=this.studentservice.getStudentDetail();
-    }, 500);
-    
+
   }
 }

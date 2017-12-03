@@ -46,7 +46,7 @@ export class DataService {
       .map(result => this.result = result.json().data);
   }
   sendEmailStudent(email) {
-    return this._http.get(this.serverAddress + "sendemail?email=" + email)
+    return this._http.get(this.serverAddress + "sendemailstudent?email=" + email)
       .map(result => this.result = result.json().data);
   }
 
