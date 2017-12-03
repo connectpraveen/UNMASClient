@@ -40,7 +40,7 @@ import { GoogleLoginProvider } from "angular4-social-login";
 import { TrainingManagerComponent } from './training-manager/training-manager.component';
 let config = new AuthServiceConfig([
   {
-    id: GoogleLoginProvider.PROVIDER_ID,
+    id: GoogleLoginProvider.PROVIDER_ID,    
     provider: new GoogleLoginProvider("1029688053841-edg82sso9d7t27fvp8dofifpdb1vtgdd.apps.googleusercontent.com")
   }
 ]);

@@ -37,10 +37,10 @@ constructor(private sharedservice: SharedDataService) {  }
     this.selectedLink = this.getSelectedLink();  
     if (this.selectedLink === 'scheduled-programs') {
     this.subject = 'Invitation to Register as Training Programme Manager';
-    this.redirectLink = 'http://localhost:4200/manager/selfregistration/ABCD';
+    this.redirectLink = 'http://braintechsolution.in/manager/selfregistration/ABCD';
     }else if (this.selectedLink === 'students') {
     this.subject = 'Invitation to Register for Online Training Programme';
-    this.redirectLink = 'http://localhost:4200/student/selfregistration/EFGH';
+    this.redirectLink = 'http://braintechsolution.in/student/selfregistration/EFGH';
   }
  }
 }
