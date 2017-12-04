@@ -20,9 +20,11 @@ export class TrainingDetailService {
     {
       //console.log(res);
       let lessons = result.map(data => data.training_program);        
-      let lessionData=lessons[0];         
-      this.TRAINING.push({id: lessionData.id , trainingName: lessionData.name, trainingMonth: 'Dec 2017',trainingFromDate:lessionData.start_date,
-      trainingToDate:lessionData.end_date, trainingPlace: 'Libya', body:lessionData.about,courseCount: 1, examCount: 1, quizCount: 1, 
-      courseContent:lessionData.course});      
+      let lessionData=lessons[0];    
+      let program =lessionData[0];
+      //console.log(lessionData)     ;
+      this.TRAINING.push({id: program.id , trainingName: program.name, trainingMonth: 'Dec 2017',trainingFromDate:program.start_date,
+      trainingToDate:program.end_date, trainingPlace: 'Libya', body:program.about,courseCount: 1, examCount: 1, quizCount: 1, 
+      courseContent:program.course});      
     }
 }

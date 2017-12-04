@@ -10,7 +10,9 @@ export interface myData {
 @Injectable()
 export class SharedDataService {
 private messageSource = new BehaviorSubject<string>("User!");
+private messageSource1 = new BehaviorSubject<string>("User!");
 currentMessage = this.messageSource.asObservable();
+currentMessage1 = this.messageSource1.asObservable();
 
 sharingData: myData={trainingname: 'tname', coursename: 'cname'};
 private selectedlink = 'dashboard';  
@@ -21,6 +23,9 @@ private static UserName='User!';
   
 changeMessage(message: string) {
   this.messageSource.next(message)
+}
+changeMessage1(message: string) {
+  this.messageSource1.next(message)
 }
   /* Function to save the mailIds */
   saveMailIds(mailIds: string) {

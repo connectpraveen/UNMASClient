@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Student } from './student'
 import { StudentDetails } from './students'
-
+import {SharedDataService} from '../shared-data.service';
 import { DataService } from '../data.service'
 
 /* Service to manipulate the Student data */
 @Injectable()
 export class StudentService {
-  training: Array<any>;
+  UserName:string;
+  training: any;
   count = 0;
   retVal: any;
   STUDENTDETAILS: StudentDetails[] = [];
@@ -39,6 +40,10 @@ export class StudentService {
     return this.STUDENTS;
   }
 
+  getTrainingData(): any {
+    return this.training;
+  }
+
   getStudentDetail(): StudentDetails[] {
     return this.STUDENTDETAILS;
   }
@@ -64,29 +69,44 @@ export class StudentService {
     this._dataService.sendEmailStudent(email).subscribe(res => this.getdata(this.retVal = res));
   }
 
-  saveStudents(name: string, email: string) {
-    this._dataService.saveStudent(name, email)
+  saveStudents(name: string, email: string, manageremail:string) {
+    this._dataService.saveStudent(name, email,manageremail)
       .subscribe(res => this.getdata(this.retVal = res));
   }
   getdata(data) {
 
   }
-  constructor(private _dataService: DataService) {
+  constructor(private _dataService: DataService,private sharedservice: SharedDataService) {
+    this.sharedservice.currentMessage1.subscribe(message => this.UserName = message); 
+
     this._dataService.getTraining()
       .subscribe(res => this.gettraining(res));
+
+             
   }
 
   public gettraining(result) {
     //console.log(res);
+    let lessionData;
     let lessons = result.map(data => data.training_program);
-    let lessionData = lessons[0].students;
-    // setTimeout(() => {
+    let x=lessons[0];
     
-    // }, 500);
-    lessionData.forEach(element => {
-      this.STUDENTDETAILS.push({ name: element.Name, email: element.Email });
-    });
+    for(let i=0;i<x.length;i++)   
+    {      
+      if(x[i].program_manager_email==this.UserName)
+      {                
+        lessionData= x[i];             
+        for( let j=0;j<lessionData.students.length;j++)
+        {
+          this.STUDENTDETAILS.push({ name: lessionData.students[j].Name, email: lessionData.students[j].Email });
+        }
+        
+      }
+    }       
+     
+   
+  
 
-    // console.log(lessionData);
+    //console.log(lessionData);
   }
 }

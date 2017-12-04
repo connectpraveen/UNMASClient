@@ -18,6 +18,13 @@ export class TrainingManagerComponent implements OnInit {
   isSaved: boolean = false;
   Training: TrainingDetail[];
   program:TrainingDetail;
+  trainingname:string;
+  programname:string;
+  startdate:string;
+  enddate:string;
+  managername:string;
+  manageremail:string;
+
   constructor(private trainingmanagerservice: TrainingManagerService, private sharedservice: SharedDataService) { this.Enroll = "Enroll"; }
 
   /* function to fetch the trainings from the service */
@@ -36,19 +43,19 @@ export class TrainingManagerComponent implements OnInit {
     return this.sharedservice.saveSelectedLink(selectedlink);
   }
   Save() {    
-    if (this.email != "" && this.name != "") {      
+   
       setTimeout(() => {
-        this.trainingmanagerservice.saveEmail(this.email);
-        this.trainingmanagerservice.saveName(this.name);
+        this.trainingmanagerservice.saveProgram(this.programname, this.startdate,this.enddate,this.managername,this.manageremail);
+        // this.trainingmanagerservice.saveName(this.name);
       }, 5000);
 
-      if (this.trainingmanagerservice.getEmailUpdateStatus && this.trainingmanagerservice.getNameUpdateStatus) {
-        this.isSaved = true;
-        if (this.checkboxValue) {
-          this.trainingmanagerservice.sendEmail(this.email);
-          this.trainingmanagerservice.manageradd(this.email);
-        }
-      }
-    }
+      // if (this.trainingmanagerservice.getEmailUpdateStatus && this.trainingmanagerservice.getNameUpdateStatus) {
+      //   this.isSaved = true;
+      //   if (this.checkboxValue) {
+      //     this.trainingmanagerservice.sendEmail(this.email);
+      //     this.trainingmanagerservice.manageradd(this.email);
+      //   }
+      // }
+    
   }
 }

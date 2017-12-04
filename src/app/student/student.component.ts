@@ -19,6 +19,7 @@ export class StudentComponent implements OnInit {
   /* variables used in this component */
   @ViewChild('openModal') openModal: ElementRef;
   public myForm: FormGroup;
+  UserName:string;
   Students: Student[];
   StudentDetails: StudentDetails[];
   invitedStudents: Student[];
@@ -30,6 +31,7 @@ export class StudentComponent implements OnInit {
   indx: number = 0;
   show = 'student-training-info';
   userRole: string;
+  training:any;
   /* Bar chart data */
   public barChartOptions: any = {
     scales: {
@@ -90,7 +92,7 @@ export class StudentComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    this.sharedservice.currentMessage1.subscribe(message => this.UserName = message);       
     this.userRole = this.getUserRole();
     if (this.userRole === 'admin') {
       this.show = 'students';
@@ -177,7 +179,7 @@ export class StudentComponent implements OnInit {
     const control = <FormArray>this.myForm.controls['studentsdata'];
     for (let i = 0; i < control.controls.length; i++) {
       if (control.controls[i].value.name != undefined && control.controls[i].value.email != undefined)
-        this.studentservice.saveStudents(control.controls[i].value.name, control.controls[i].value.email);
+        this.studentservice.saveStudents(control.controls[i].value.name, control.controls[i].value.email,this.UserName);
       // this.studentservice.sendEmail(control.controls[i].value.email);
       setTimeout(() => {
         this.router.navigate(['dashboard']);  

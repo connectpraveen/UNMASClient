@@ -48,6 +48,9 @@ export class TrainingManagerService {
     this._dataService.saveName(name).subscribe(res => this.getnameService(this.nameService = res));;
   }
 
+  public saveProgram(programname, startdate,enddate,managername,manageremail) {
+    this._dataService.saveProgram(programname, startdate,enddate,managername,manageremail).subscribe(res => this.getnameService(this.nameService = res));;
+  }
   public getnameService(nameService) {
     this.IsNameSaved = true;
   }

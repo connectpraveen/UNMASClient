@@ -43,6 +43,7 @@ export class LoginComponent implements OnInit {
       if(user!=null)
       {        
         this.newMessage(user.name + '!');   
+        this.newMessage1(user.email);   
         let found=0;
         this.UsersData.forEach(element => {        
           if (element.username == user.email) {
@@ -59,6 +60,10 @@ export class LoginComponent implements OnInit {
   }
   newMessage(str) {
     this.sharedservice.changeMessage(str)
+  }
+
+  newMessage1(str) {
+    this.sharedservice.changeMessage1(str)
   }
 
   signInWithGoogle(): void {
