@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 import { TrainingManagerService } from './training-manager.service'
 import { TrainingManager } from './training-manager'
 import { SharedDataService } from '../shared-data.service';
@@ -24,8 +25,8 @@ export class TrainingManagerComponent implements OnInit {
   enddate:string;
   managername:string;
   manageremail:string;
-
-  constructor(private trainingmanagerservice: TrainingManagerService, private sharedservice: SharedDataService) { this.Enroll = "Enroll"; }
+  SaveValue:string="Save";
+  constructor(private router: Router,private trainingmanagerservice: TrainingManagerService, private sharedservice: SharedDataService) { this.Enroll = "Enroll"; }
 
   /* function to fetch the trainings from the service */
   getTrainingDetails() {
@@ -44,18 +45,19 @@ export class TrainingManagerComponent implements OnInit {
   }
   Save() {    
    
+    this.SaveValue="Saving... Please wait...";
       setTimeout(() => {
         this.trainingmanagerservice.saveProgram(this.programname, this.startdate,this.enddate,this.managername,this.manageremail);
         // this.trainingmanagerservice.saveName(this.name);
+        
       }, 5000);
 
-      // if (this.trainingmanagerservice.getEmailUpdateStatus && this.trainingmanagerservice.getNameUpdateStatus) {
-      //   this.isSaved = true;
-      //   if (this.checkboxValue) {
-      //     this.trainingmanagerservice.sendEmail(this.email);
-      //     this.trainingmanagerservice.manageradd(this.email);
-      //   }
-      // }
+      setTimeout(() => {
+        this.router.navigate(['dashboard']);
+        // this.trainingmanagerservice.saveName(this.name);
+      }, 5000);
+
+      
     
   }
 }

@@ -5,6 +5,7 @@ import { ScheduledProgram } from '../scheduled-programs/scheduled-program'
 import { Student } from '../student/student'
 import { StudentService } from '../student/student.service'
 import { BaseChartDirective } from 'ng2-charts';
+import { DataService } from '../data.service'
 
 @Component({
   selector: 'dashboard',
@@ -30,6 +31,7 @@ count=0;  _dataLabels = [];
     responsive: true
   };
   public UserName:string;
+  public training:any[];
   public studbarChartLabels:string[];
   public studbarChartType:string = 'bar';
   public studbarChartLegend:boolean = false;
@@ -47,9 +49,19 @@ count=0;  _dataLabels = [];
   public statusbarChartLegend:boolean = false;
  
   public statusbarChartData:any[] ;   
-   constructor(private sharedservice: SharedDataService, private spservice: ScheduledProgramsService, private studservice: StudentService) { 
-
+   constructor(private _dataService: DataService,private sharedservice: SharedDataService, private spservice: ScheduledProgramsService, private studservice: StudentService) { 
+    this._dataService.getTraining()
+    .subscribe(res => this.gettraining(res));
    }
+
+   public gettraining(result) {
+    //console.log(res);
+    let lessionData;
+    let lessons = result.map(data => data.training_program);
+    this.training=lessons[0];  
+             
+    //console.log(this.training);
+  }
   ngOnInit() {      
     /* save the link in shared service to highlight the left nav */
     this.saveSelectedLink('dashboard');    

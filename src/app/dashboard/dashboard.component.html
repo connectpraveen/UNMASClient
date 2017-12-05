@@ -24,62 +24,46 @@
           <!--col-sm-2-->
           <div class="col-sm-12 col-md-10 " style="min-height:525px">
             <div class="row" style="padding-left:15px;padding-top:10px">
-              <h6 class="heading-text"> Dashboard </h6>
+              <h6 class="heading-text"> All Training Programmes </h6>
+              <br>
+              <br>
             </div>
             <!--/.com-sm-10-->
 
-            <div class="row" style="padding-left:15px;padding-bottom:15px;">
-              <div class="col-sm-12 col-md-12 panelbg" style="padding-left:10px;padding-top:15px">
-                <div class="row" style="padding-top:10px;">
-                  <div class="col-md-5" style="padding-top:10px;">
-                    <h6 class="body-text">
-                     <span style="color: red;"><b>sample charts..</b></span> 
-                    </h6>
-                  </div>
+            <!-- <div class="row" style="padding-left:15px;padding-top:10px">
+              <h6 class="heading-text"> All Training Programmes </h6>
+            </div> -->
+            <!--/.com-sm-10-->
+            <div class="container" *ngFor="let program of training">
+            <div class="row" style="padding-bottom:50px">
+              <div class="col-sm-12 col-md-12 col-lg-12 panelbg zero-padding">
+              <div class="row">             
+                <div class="col-sm-6 col-md-5 col-lg-6 panel-margin">
+                  <h6 class="heading-text image-align zero-padding"> Program Name: {{program.name}}</h6>
+                  <div class="body-text"> 
+                    <br> Program Manager Name: {{program.program_manager}}  </div>
+                    <div class="body-text"> 
+                      <br> Program Manager Email: {{program.program_manager_email}}  </div>
+                  <div class="body-text"> 
+                    <br> Start Date: {{program.start_date}} - End Date:{{program.end_date}} </div>
                 </div>
-
-              </div>
-              <div class="row">
-                <div class="col-md-6 col-sm-6" style="margin-bottom:15px">
-                  <div class="panelbg image-align">
-                    <h4 class="body-text">
-                      <b> Courses/Training Programs </b>
-                    </h4>
-                    <div style="display: block" style="height:30%">
-                      <canvas *ngIf="doughnutChartData" baseChart [data]="doughnutChartData" width="300" height="200" [labels]="doughnutChartLabels"
-                        [chartType]="doughnutChartType" [options]="doughnutChartOptions" (chartClick)="chartClicked($event)">
-                      </canvas>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-6 col-sm-6" style="margin-bottom:15px">
-                  <div class=" image-align panelbg" style="height:100%">
-                    <h4 class="body-text">
-                      <b> Students Count </b>
-                    </h4>
-                    <div style="display: block" style="height:30%">
-                      <canvas #studbaseChart="base-chart" *ngIf="studbarChartData" baseChart [datasets]="studbarChartData" width="300" height="200"
-                        [labels]="studbarChartLabels" [options]="studbarChartOptions" [legend]="studbarChartLegend" [chartType]="studbarChartType">
-                      </canvas>
-                    </div>
+                <div class="col-sm-8 col-md-5 col-lg-4 panel-margin image-align" style="padding-top:10px;padding-right:30px">
+                  <div>
+                    <!-- <button type="button" class="btn btn-sm button-show-style" style="float:left" (click)="onShowDetails(training.trainingName,training.id)">
+                      <h4 class="body-text" style="color:white"> Show
+                        <br> Details </h4>
+                    </button> -->
+                  
+                    <button type="button" class="btn btn-sm button-view-style" style="float:right;">
+                      <h4 class="body-text" style="color:white"> View
+                        <br> Students </h4>
+                    </button>
                   </div>
                 </div>
               </div>
-              <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12" style="margin-bottom:15px">
-                  <div class="image-align panelbg" style="height:100%">
-                    <h4 class="body-text">
-                      <b> Students Enrollment and Certification</b>
-                    </h4>
-                    <div style="display: block" style="height:30%">
-                      <canvas #statusbaseChart="base-chart" *ngIf="statusbarChartData" baseChart [datasets]="statusbarChartData" width="600" height="200"
-                        [labels]="statusbarChartLabels" [options]="statusbarChartOptions" [legend]="statusbarChartLegend" [chartType]="statusbarChartType">
-                      </canvas>
-                    </div>
-                  </div>
-                </div>
               </div>
             </div>
+          </div>
           </div>
         </div>
       </div>
