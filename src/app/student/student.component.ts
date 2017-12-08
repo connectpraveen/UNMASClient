@@ -84,7 +84,7 @@ export class StudentComponent implements OnInit {
           lessionData= x[i];             
           for( let j=0;j<lessionData.students.length;j++)
           {
-            this.StudentDetails.push({ name: lessionData.students[j].Name, email: lessionData.students[j].Email });
+            this.StudentDetails.push({ name: lessionData.students[j].Name, email: lessionData.students[j].Email,Registered: lessionData.students[j].Registered, Enrolled: lessionData.students[j].Enrolled  });
           } 
         }                         
       }  

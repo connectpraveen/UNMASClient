@@ -52,15 +52,15 @@
                     <tbody>
                       <tr class="body-text" *ngFor="let student of STUDENTDETAILS">
                         <td>
-                        
-                        <td>
-                          <div class="heading-text zero-padding">{{student.name}}</div>
-                          <div>{{student.email}}</div>
-                        
-                        </td>
-                        <td style="vertical-align:middle" class="center-align"></td>
-                        <td style="vertical-align:middle" class="center-align"></td>
-                        <!-- <td style="vertical-align:middle" class="center-align">
+
+                          <td>
+                            <div class="heading-text zero-padding">{{student.name}}</div>
+                            <div>{{student.email}}</div>
+
+                          </td>
+                          <td style="vertical-align:middle" class="center-align"></td>
+                          <td style="vertical-align:middle" class="center-align"></td>
+                          <!-- <td style="vertical-align:middle" class="center-align">
                           <input type="button" id={{student.id}} class="btn btn-small view-profile-style" #elem (click)="onViewClick(elem.id)" value="View Profile"
                             style="color:white">
                         </td> -->
@@ -138,22 +138,30 @@
                   <table class="table table-striped">
                     <thead>
                       <tr>
-                        <th width="10%"> </th>
-                        <th width="20%">Name</th>
-                        <th width="20%">Email</th>                     
-                        <th width="30%"></th>
+                        <th width="30%">Name</th>
+                        <th width="30%">Email</th>
+                        <th width="10%">Invited</th>
+                        <th width="10%">Registered</th>
+                        <th width="10%">Enrolled</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr class="body-text" *ngFor="let student of StudentDetails">
+                      <tr class="body-text" *ngFor="let student of StudentDetails">                      
                         <td>
+                          <div class="heading-text zero-padding">{{student.name}}</div>
                         </td>
                         <td>
-                          <div class="heading-text zero-padding">{{student.name}}</div>                       
+                          <div class="heading-text zero-padding">{{student.email}}</div>
                         </td>
-                        <td> <div class="heading-text zero-padding">{{student.email}}</div></td>
-                        <td style="vertical-align:middle" class="center-align"></td>
-                        <td></td>
+                        <td>
+                          <div class="heading-text zero-padding">Yes</div>
+                        </td>
+                        <td>
+                          <div class="heading-text zero-padding">{{student.Registered}}</div>
+                        </td>
+                        <td>
+                          <div class="heading-text zero-padding">{{student.Enrolled}}</div>
+                        </td>
                         <!-- <td style="vertical-align:middle" class="center-align">
                           <input type="button" id={{student.id}} class="btn btn-small view-profile-style" #elem (click)="onViewClick(elem.id)" value="View Profile"
                             style="color:white">
@@ -241,7 +249,7 @@
                               </div>
                               <div class="col-md-7">
                                 <span style="padding-right:10px">
-                                  <input class="input-sm body-text" id="inputsm"  style="width:41%" type="text" formControlName="name">
+                                  <input class="input-sm body-text" id="inputsm" style="width:41%" type="text" formControlName="name">
                                 </span>
                                 <input class="input-sm body-text" id="inputsm" type="text" style="width:41%" formControlName="email">
                               </div>

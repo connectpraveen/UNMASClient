@@ -99,7 +99,7 @@ export class StudentService {
         lessionData= x[i];             
         for( let j=0;j<lessionData.students.length;j++)
         {
-          this.STUDENTDETAILS.push({ name: lessionData.students[j].Name, email: lessionData.students[j].Email });
+          this.STUDENTDETAILS.push({ name: lessionData.students[j].Name, email: lessionData.students[j].Email,Registered: lessionData.students[j].Registered, Enrolled: lessionData.students[j].Enrolled });
         }
         
       }
@@ -112,7 +112,7 @@ export class StudentService {
           lessionData= x[i];             
           for( let j=0;j<lessionData.students.length;j++)
           {
-            this.STUDENTDETAILS.push({ name: lessionData.students[j].Name, email: lessionData.students[j].Email });
+            this.STUDENTDETAILS.push({ name: lessionData.students[j].Name, email: lessionData.students[j].Email,Registered: lessionData.students[j].Registered, Enrolled: lessionData.students[j].Enrolled  });
           }  
           break;                
       }       
