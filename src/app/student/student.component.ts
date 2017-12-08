@@ -8,7 +8,7 @@ import { Location } from '@angular/common';
 import { ChartsModule } from 'ng2-charts';
 import { EmailComponent } from '../email/email.component';
 import { SharedDataService } from '../shared-data.service';
-
+import { DataService } from '../data.service';
 @Component({
   selector: 'student',
   templateUrl: './student.component.html',
@@ -21,7 +21,7 @@ export class StudentComponent implements OnInit {
   public myForm: FormGroup;
   UserName:string;
   Students: Student[];
-  StudentDetails: StudentDetails[];
+  StudentDetails: StudentDetails[]=[];  
   invitedStudents: Student[];
   student: Student;
   checkboxValue: boolean = true;
@@ -32,6 +32,7 @@ export class StudentComponent implements OnInit {
   show = 'student-training-info';
   userRole: string;
   training:any;
+  IsManager:boolean=false;
   /* Bar chart data */
   public barChartOptions: any = {
     scales: {
@@ -64,8 +65,35 @@ export class StudentComponent implements OnInit {
 
   public barChartData: any[] = [{ data: [34, 0], label: 'Enrolled: 86%' }, { data: [16, 0], label: 'Pending: 14%' }];
 
-  constructor(private router: Router,private studentservice: StudentService, private _location: Location, private _fb: FormBuilder, private sharedservice: SharedDataService) { }
-
+  constructor(private _dataService: DataService,private router: Router,private studentservice: StudentService, private _location: Location, private _fb: FormBuilder, private sharedservice: SharedDataService) { this.userRole = this.getUserRole();
+    this._dataService.getTraining()
+    .subscribe(res => this.gettraining(res));
+  }
+  public gettraining(result) {
+    //console.log(res);
+    let lessionData;
+    let lessons = result.map(data => data.training_program);
+    let x=lessons[0];
+    
+    if(this.sharedservice.getUserRole()==='admin')
+    {
+      for(let i=0;i<x.length;i++)   
+      {                
+        if(x[i].program_manager_email==this.sharedservice.getSelectedManager())
+        {     
+          lessionData= x[i];             
+          for( let j=0;j<lessionData.students.length;j++)
+          {
+            this.StudentDetails.push({ name: lessionData.students[j].Name, email: lessionData.students[j].Email });
+          } 
+        }                         
+      }  
+      
+     
+    }
+     
+    //console.log(lessionData);
+  }
   /* function to save the selected link in shared service, used to highlight left navigation */
   saveSelectedLink(selectedlink: string) {
     return this.sharedservice.saveSelectedLink(selectedlink);
@@ -92,24 +120,26 @@ export class StudentComponent implements OnInit {
   }
 
   ngOnInit() {
+    
     this.sharedservice.currentMessage1.subscribe(message => this.UserName = message);       
     this.userRole = this.getUserRole();
-    if (this.userRole === 'admin') {
-      this.show = 'students';
-      this.Students = this.studentservice.getStudents();
+    
+    if (this.userRole === 'admin') {      
+      this.IsManager=false;       
     }
     else if (this.userRole === 'manager') {
+      this.IsManager=true;
       this.show = 'student-training-info';
       this.StudentDetails = this.studentservice.getStudentDetail();
-      this.invitedStudents = this.studentservice.getInvitedStudents();
-
+      //this.invitedStudents = this.studentservice.getInvitedStudents();
+      this.saveSelectedLink('students');
+      this.myForm = this._fb.group({
+        studentsdata: this._fb.array([
+          this.initStudentData()
+        ])
+      });
     }
-    this.saveSelectedLink('students');
-    this.myForm = this._fb.group({
-      studentsdata: this._fb.array([
-        this.initStudentData()
-      ])
-    });
+   
   }
 
   /* function used in invite students form to add name and email textboxes on click of + sign */

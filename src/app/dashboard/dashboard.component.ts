@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 import {SharedDataService} from '../shared-data.service';
 import { ScheduledProgramsService } from '../scheduled-programs/scheduled-programs.service'
 import { ScheduledProgram } from '../scheduled-programs/scheduled-program'
@@ -31,11 +32,11 @@ count=0;  _dataLabels = [];
     responsive: true
   };
   public UserName:string;
-  public training:any[];
+  public training:any[]=[];
   public studbarChartLabels:string[];
   public studbarChartType:string = 'bar';
   public studbarChartLegend:boolean = false;
- 
+  public userRole:string;
   public studbarChartData:any[]
     
     /* Data Values for Bar Chart */
@@ -49,7 +50,7 @@ count=0;  _dataLabels = [];
   public statusbarChartLegend:boolean = false;
  
   public statusbarChartData:any[] ;   
-   constructor(private _dataService: DataService,private sharedservice: SharedDataService, private spservice: ScheduledProgramsService, private studservice: StudentService) { 
+   constructor(private router: Router,private _dataService: DataService,private sharedservice: SharedDataService, private spservice: ScheduledProgramsService, private studservice: StudentService) { 
     this._dataService.getTraining()
     .subscribe(res => this.gettraining(res));
    }
@@ -58,12 +59,37 @@ count=0;  _dataLabels = [];
     //console.log(res);
     let lessionData;
     let lessons = result.map(data => data.training_program);
-    this.training=lessons[0];  
+    //this.training=lessons[0];  
+    let x=lessons[0];        
+    if(this.sharedservice.getUserRole()!='admin')
+    for(let i=0;i<x.length;i++)   
+    {      
+      if(x[i].program_manager_email==this.UserName)
+      {                
+        this.training.push(x[i]);                 
+        break;
+      }
+    }
+    else   
+    this.training=lessons[0];    
              
     //console.log(this.training);
   }
+  getUserRole(): string {
+    return this.sharedservice.getUserRole();
+  }
+ 
+  viewstudent(program_manager_email)
+  {
+    //console.log(program_manager_email);
+    this.sharedservice.saveSelectedManager(program_manager_email);
+    this.router.navigate(['student']);
+  }
   ngOnInit() {      
     /* save the link in shared service to highlight the left nav */
+    this.sharedservice.currentMessage1.subscribe(message => this.UserName = message);       
+    this.userRole = this.getUserRole();
+
     this.saveSelectedLink('dashboard');    
     /* render the Student and Student Status Charts with dynamic data*/
     this.updateStudChart(this.getScheduledPrograms());

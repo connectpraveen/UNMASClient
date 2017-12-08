@@ -91,6 +91,7 @@ export class StudentService {
     let lessons = result.map(data => data.training_program);
     let x=lessons[0];
     
+    if(this.sharedservice.getUserRole()!='admin')
     for(let i=0;i<x.length;i++)   
     {      
       if(x[i].program_manager_email==this.UserName)
@@ -102,7 +103,20 @@ export class StudentService {
         }
         
       }
-    }       
+    } 
+    
+    else
+    {
+      for(let i=0;i<x.length;i++)   
+      {                         
+          lessionData= x[i];             
+          for( let j=0;j<lessionData.students.length;j++)
+          {
+            this.STUDENTDETAILS.push({ name: lessionData.students[j].Name, email: lessionData.students[j].Email });
+          }  
+          break;                
+      }       
+    }
      
     //console.log(lessionData);
   }

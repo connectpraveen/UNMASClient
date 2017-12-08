@@ -130,7 +130,7 @@
               <div class="row"> </div>
               <div class="row">
                 <div class="col-md-12">
-                  <h6 class="heading-text"> Invited Students </h6>
+                  <h6 class="heading-text"> Student List </h6>
                 </div>
               </div>
               <div class="row" style="padding-left:15px;padding-bottom:15px">
@@ -162,7 +162,7 @@
                     </tbody>
                   </table>
                 </div>
-                <div class="col-md-12 col-sm-12 zero-padding body-text" style="padding-right:10px;padding-bottom:30px;">
+                <div *ngIf="IsManager" class="col-md-12 col-sm-12 zero-padding body-text" style="padding-right:10px;padding-bottom:30px;">
                   <i class="fa fa-plus-circle fa-3x pull-right" aria-hidden="true" (click)="onInviteClick()"></i>
                   <span style="float:right;padding-top:10px">Invite more Students</span>
                 </div>

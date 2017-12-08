@@ -20,6 +20,7 @@ private userrole='none';
 private isUserLoggedIn;
 private mailIds='mailTo';  
 private static UserName='User!';  
+private  SelectedManager:string='';  
   
 changeMessage(message: string) {
   this.messageSource.next(message)
@@ -86,6 +87,12 @@ changeMessage1(message: string) {
     this.selectedlink = selectedlink;
   }
   
+  saveSelectedManager(selectedManager : string){
+    this.SelectedManager = selectedManager;
+  }
+  getSelectedManager(): string {
+    return this.SelectedManager;
+  }
    /* Function to get the selected link */
   getSelectedLink(): string {
     return this.selectedlink;
