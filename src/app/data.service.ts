@@ -8,7 +8,7 @@ export class DataService {
   serverAddress: string = "http://ec2-18-216-152-50.us-east-2.compute.amazonaws.com:3000/api/";
   localAddress: string = "http://localhost:3000/api/";
 
-  constructor(private _http: Http) {this.serverAddress=this.localAddress; }
+  constructor(private _http: Http) {}
 
 
 
@@ -62,6 +62,15 @@ export class DataService {
 
   saveProgram(programname, startdate,enddate,managername,manageremail) {
     return this._http.get(this.serverAddress + "programcreate?programname=" + programname + "&startdate=" + startdate+ "&enddate=" + enddate+ "&managername=" + managername+ "&manageremail=" + manageremail)
+      .map(result => this.result = result.json().data);
+  }
+
+  saveRegistration(email) {
+    return this._http.get(this.serverAddress + "regsave?email=" + email)
+      .map(result => this.result = result.json().data);
+  }
+  saveEnroll(email) {
+    return this._http.get(this.serverAddress + "enrollsave?email=" + email)
       .map(result => this.result = result.json().data);
   }
 }

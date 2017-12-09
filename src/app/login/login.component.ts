@@ -7,6 +7,7 @@ import { AuthService } from 'angular4-social-login';
 import { SocialUser } from 'angular4-social-login';
 import { GoogleLoginProvider } from 'angular4-social-login';
 import { UserDetails } from './UserDetails';
+import { DataService } from '../data.service';
 @Component({
   moduleId: module.id,
   selector: 'login',
@@ -25,7 +26,7 @@ export class LoginComponent implements OnInit {
   user: SocialUser;
   message: string;
   UsersData: UserDetails[];
-  constructor(private router: Router, private sharedservice: SharedDataService, private route: ActivatedRoute, private authService: AuthService, private loginservice: LoginService) {    
+  constructor(private _dataService: DataService,private router: Router, private sharedservice: SharedDataService, private route: ActivatedRoute, private authService: AuthService, private loginservice: LoginService) {    
   }
 
   ngOnInit() {    
@@ -98,11 +99,13 @@ export class LoginComponent implements OnInit {
     else
       this.authorizedFlag = false;
   }
+getdata1(res)
+{
 
+}
   /* authenticate the user */
   onLogin(_role) {
-    //  this.newMessage(this.user.name);  
-
+    //  this.newMessage(this.user.name);    
     if (_role == 'student')
       this.setUserRole('student');
     if (_role == 'admin')
@@ -112,6 +115,12 @@ export class LoginComponent implements OnInit {
     if (_role == 'admin' || _role == 'manager')
       this.router.navigate(['dashboard']);
     if (_role == 'student')
+    {
+      setTimeout(() => {
+        this._dataService.saveRegistration(this.user.email).subscribe(res => this.getdata1(res));
+      }, 1000);        
       this.router.navigate(['training-detail']);
+    }
+      
   }
 }
