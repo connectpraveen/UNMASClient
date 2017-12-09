@@ -12,7 +12,7 @@ exports.config = {
     'browserName': 'chrome'
   },
   directConnect: true,
-  baseUrl: 'http://braintechsolution.in/',
+  baseUrl: 'http://www.unmas.org.s3-website.us-east-2.amazonaws.com/',
   framework: 'jasmine',
   jasmineNodeOpts: {
     showColors: true,
